@@ -19,7 +19,7 @@ export class FindPlantsComponent implements OnInit{
     this.findPlantsService.findPlants()
       .then((plantTypes: PlantType[]) =>{
         this.plantTypes = plantTypes;
-        console.log(plantTypes);
+        console.log(plantTypes)
       });
   }
 }

@@ -1,1 +1,7 @@
-<p>find works!</p>
+<div class="container-fluid">
+    <div class="plants-container">
+        <div *ngFor="let plant of plantTypes">
+            <app-plant [plant]="plant"></app-plant>
+        </div>
+    </div>
+</div>
