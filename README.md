@@ -1,4 +1,31 @@
-# MyApps
+# MyPlants
+
+## Main features to be developed
+
+- Viewing your collection of plants
+- Adding plants to your collection
+- Adding plant species
+- Searching through database of species
+
+## Tech stack
+
+- Angular
+- Firebase
+- Bootstrap 5
+- Typescript
+- Sass
+
+## Development plan
+
+- Add simple navigation bar ✅
+
+- [Find view] Show mocked plant species
+  - Create types service with mocked data
+  - Create type component with simple design
+
+- [Add plant view] Add plant type view
+  - Add button in find-component to add plant type
+  - create dialog for adding new type
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
