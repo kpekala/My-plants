@@ -14,6 +14,7 @@
 - Bootstrap 5
 - Typescript
 - Sass
+- Coffe
 
 ## Development plan
 
