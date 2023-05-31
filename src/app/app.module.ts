@@ -5,14 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { FindComponent } from './find/find.component';
+import { FindPlantsComponent } from './find/find-plants.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavigationComponent,
-    FindComponent
+    FindPlantsComponent
   ],
   imports: [
     BrowserModule,
