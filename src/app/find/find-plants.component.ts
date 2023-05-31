@@ -9,12 +9,17 @@ import { PlantType } from './plant-type.model';
 })
 export class FindPlantsComponent implements OnInit{
 
+  plantTypes: PlantType[] = [];
+
   constructor (private findPlantsService: FindPlantsService){
+
   }
 
   ngOnInit(): void {
-    this.findPlantsService.find.subscribe((plantTypes: PlantType[]) =>{
+    this.findPlantsService.findPlants()
+      .then((plantTypes: PlantType[]) =>{
+        this.plantTypes = plantTypes;
         console.log(plantTypes);
-    });
+      });
   }
 }

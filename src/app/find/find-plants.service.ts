@@ -29,8 +29,9 @@ export class FindPlantsService{
         }
     ];
 
-    find = new Observable<PlantType[]>((subscriber) =>{
-        subscriber.next(this.plantTypes.slice());
-        subscriber.complete();
-    });
+    findPlants(): Promise<PlantType[]>{
+        return new Promise((resolve, reject) => {
+            resolve(this.plantTypes);
+        })
+    }
 }
