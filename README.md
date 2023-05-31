@@ -21,7 +21,7 @@
 - Add simple navigation bar ✅
 
 - [Find view] Show mocked plant species
-  - Create types service with mocked data
+  - Create types service with mocked data ✅
   - Create type component with simple design
 
 - [Add plant view] Add plant type view
