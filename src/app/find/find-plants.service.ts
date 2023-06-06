@@ -1,6 +1,5 @@
-import { Injectable } from "@angular/core";
-import { PlantType } from "./plant-type.model";
-import { Observable } from "rxjs/internal/Observable";
+import {Injectable} from "@angular/core";
+import {PlantType} from "./plant-type.model";
 
 @Injectable({
     providedIn: 'root'
@@ -11,9 +10,9 @@ export class FindPlantsService{
         {
             speciesName: 'Humulus',
             family: 'Cannabaceae',
-            ownersCount: 23, 
+            ownersCount: 23,
             imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Humulus.jpg'
-        
+
         },
         {
             speciesName: 'Dandelion',
@@ -30,8 +29,9 @@ export class FindPlantsService{
     ];
 
     findPlants(): Promise<PlantType[]>{
-        return new Promise((resolve, reject) => {
-            resolve(this.plantTypes);
+        return new Promise((resolve) => {
+            let plants = this.plantTypes.concat(this.plantTypes.concat(this.plantTypes));
+            resolve(plants);
         })
     }
 }
