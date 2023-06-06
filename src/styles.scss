@@ -7,6 +7,20 @@ $tertiary: #E3FCBF;
 $danger: #00FFAB;
 
 
-html, body { 
+html, body {
     height: 100%;
+}
+
+.btn-bd-primary{
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: #{$primary};
+    --bs-btn-border-color: #{$primary};
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #{shade-color($primary, 10%)};
+    --bs-btn-hover-border-color: #{shade-color($primary, 10%)};
+    --bs-btn-focus-shadow-rgb: #{$primary};
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #{shade-color($primary, 20%)};
+    --bs-btn-active-border-color: #{shade-color($primary, 20%)};
 }
