@@ -1,12 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { FindPlantsComponent } from './find/find-plants.component';
+import { HomeComponent } from './layout/home/home.component';
+import { FindPlantsComponent } from './layout/find/find-plants.component';
+import {LayoutComponent} from "./layout/layout.component";
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'find', component: FindPlantsComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'}
+
+  {path: '', redirectTo: 'app/home', pathMatch: 'full'},
+    {
+        path: 'app',
+        component: LayoutComponent,
+        children: [
+            {path: 'home', component: HomeComponent},
+            {path: 'find', component: FindPlantsComponent}
+        ]
+    }
 ];
 
 @NgModule({

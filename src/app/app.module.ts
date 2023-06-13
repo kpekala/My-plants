@@ -3,10 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { FindPlantsComponent } from './find/find-plants.component';
-import { PlantComponent } from './find/plant/plant.component';
+import { FindPlantsComponent } from './layout/find/find-plants.component';
+import { PlantComponent } from './layout/find/plant/plant.component';
+import { LayoutComponent } from './layout/layout.component';
+import {HomeComponent} from "./layout/home/home.component";
+import {NavigationComponent} from "./layout/navigation/navigation.component";
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { PlantComponent } from './find/plant/plant.component';
     HomeComponent,
     NavigationComponent,
     FindPlantsComponent,
-    PlantComponent
+    PlantComponent,
+    LayoutComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
