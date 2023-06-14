@@ -9,6 +9,8 @@ import { LayoutComponent } from './layout/layout.component';
 import {HomeComponent} from "./layout/home/home.component";
 import {NavigationComponent} from "./layout/navigation/navigation.component";
 import { AuthComponent } from './auth/auth.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { AuthComponent } from './auth/auth.component';
     FindPlantsComponent,
     PlantComponent,
     LayoutComponent,
-    AuthComponent
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
