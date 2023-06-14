@@ -1,0 +1,15 @@
+@import 'styles';
+
+.login-container{
+    width: 24rem;
+}
+
+.button-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.app-title{
+    color: $primary;
+}

@@ -29,11 +29,12 @@
 							"src/assets"
 						],
 						"styles": [
-							"src/styles.scss"
+							"src/scss/styles.scss"
 						],
 						"stylePreprocessorOptions": {
 							"includePaths": [
-							  "node_modules/bootstrap/scss"
+							  "node_modules/bootstrap/scss",
+							  "src/scss"
 							]
 						  },
 						"scripts": [

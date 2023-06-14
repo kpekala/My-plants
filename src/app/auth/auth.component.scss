@@ -1,0 +1,8 @@
+@import './../../scss/variables.scss';
+
+.auth-container{
+    background-color: $secondary;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

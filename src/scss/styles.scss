@@ -1,10 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "../node_modules/bootstrap/scss/bootstrap";
-
-$primary: #14C38E;
-$secondary: #B8F1B0;
-$tertiary: #E3FCBF;
-$danger: #00FFAB;
+@import 'bootstrap';
+@import 'variables';
 
 
 html, body {
