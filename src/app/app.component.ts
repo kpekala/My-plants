@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { AuthService } from './auth/auth.service';
+import { FirebaseService } from './data/firebase.service';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent implements OnInit {
 
     isLoggedIn = false;
 
-    constructor(private authService: AuthService){
+    constructor(private authService: AuthService, private firebaseService: FirebaseService){
 
     }
 
