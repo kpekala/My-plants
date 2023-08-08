@@ -9,14 +9,12 @@ import { FirebaseService } from './data/firebase.service';
 })
 export class AppComponent implements OnInit {
 
-    isLoggedIn = false;
 
     constructor(private authService: AuthService, private firebaseService: FirebaseService){
 
     }
 
     ngOnInit(): void {
-        this.isLoggedIn = this.authService.isLoggedIn();
     }
 
 

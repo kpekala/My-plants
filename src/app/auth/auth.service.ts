@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
 
 
 @Injectable({
@@ -6,9 +7,7 @@ import { Injectable } from "@angular/core";
 })
 export class AuthService {
     
-    private loggedIn = false;
-
-    isLoggedIn(){
-        return this.loggedIn;
+    isLoggedIn(): Observable<boolean>{
+        return of(false);
     }
 }
