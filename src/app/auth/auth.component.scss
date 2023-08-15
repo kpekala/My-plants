@@ -1,8 +1,23 @@
 @import './../../scss/variables.scss';
+@import 'styles';
 
 .auth-container{
     background-color: $secondary;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.login-container{
+    width: 24rem;
+}
+
+.button-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.app-title{
+    color: $primary;
 }

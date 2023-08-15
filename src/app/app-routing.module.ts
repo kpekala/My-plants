@@ -6,6 +6,7 @@ import {LayoutComponent} from "./layout/layout.component";
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth-guard.service';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
 
@@ -25,7 +26,8 @@ const routes: Routes = [
 	component: AuthComponent,
 	children: [
 		{path: '', pathMatch: 'full', redirectTo: 'login'},
-		{path: 'login', component: LoginComponent}
+		{path: 'login', component: LoginComponent},
+		{path: 'register', component: RegisterComponent}
 	]
   },
   {path: '**', redirectTo: 'auth'}
