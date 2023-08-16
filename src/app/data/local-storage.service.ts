@@ -8,7 +8,6 @@ export class LocalStorageService {
     }
     
     public getData(key: string): string | null {
-        console.log(localStorage.getItem(key));
         return localStorage.getItem(key);
     }
     public removeData(key: string) {

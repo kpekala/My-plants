@@ -7,16 +7,10 @@ import { AuthService } from '../auth/auth.service';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent {
 
   constructor(private router: Router, private authService: AuthService){
 
-  }
-
-  ngOnInit(): void {
-    if(!this.authService.isLoggedIn()){
-      this.router.navigate(['/auth/login']);
-    }
   }
 
 }

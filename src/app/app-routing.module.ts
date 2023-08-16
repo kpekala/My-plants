@@ -7,7 +7,7 @@ import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
 import { homeGuard } from './layout/home/home-guard';
 import { RegisterComponent } from './auth/register/register.component';
-import { authGuard } from './auth/auth-guards';
+import { authGuard } from './auth/auth-guard';
 
 const routes: Routes = [
 
@@ -27,9 +27,9 @@ const routes: Routes = [
 	component: AuthComponent,
 	canActivate: [authGuard],
 	children: [
-		{path: '', pathMatch: 'full', redirectTo: 'login'},
 		{path: 'login', component: LoginComponent},
-		{path: 'register', component: RegisterComponent}
+		{path: 'register', component: RegisterComponent},
+		{path: '', pathMatch: 'full', redirectTo: 'login'}
 	]
   },
   {path: '**', redirectTo: 'auth'}
