@@ -1,8 +1,7 @@
-import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from "@angular/router";
-import { AuthService } from "./auth.service";
 import { inject } from "@angular/core";
+import { Router } from "@angular/router";
 import { tap } from "rxjs";
-
+import { AuthService } from "./auth.service";
 
 export function authGuard() {
     const authService: AuthService = inject(AuthService);
@@ -11,7 +10,7 @@ export function authGuard() {
     authService.isLoggedIn().subscribe();
     return authService.isLoggedIn().pipe(
         tap((isLoggedIn) => {
-            return isLoggedIn ? true : router.navigate(['/app/login']);
+            return !isLoggedIn ? true : router.navigate(['/app/home']);
         })
     );
 } 

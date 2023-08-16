@@ -1,14 +1,21 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { LocalStorageService } from "../data/local-storage.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
+
+    private USER_LOGGED_IN_KEY = "USER_LOGGED_IN_KEY";
+
+    constructor(private localStorageService: LocalStorageService){
+
+    }
     
     isLoggedIn(): Observable<boolean>{
-        return of(false);
+        return of(this.localStorageService.getData(this.USER_LOGGED_IN_KEY) != null);
     }
 
     login(email: string, password: string){
@@ -16,6 +23,7 @@ export class AuthService {
         return signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                this.saveUserData(userCredential);
                 console.log(`User ${user} is logged in`);
             })
             .catch((error) => {
@@ -31,6 +39,7 @@ export class AuthService {
         return createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                this.saveUserData(userCredential);
                 console.log(`User ${user} is created`);
             })
             .catch((error) => {
@@ -39,5 +48,8 @@ export class AuthService {
                 console.log(`User failed to log in. Reason: ${errorMessage}`);
                 return error;
             });
+    }
+    saveUserData(userCredential: UserCredential) {
+        this.localStorageService.saveData(this.USER_LOGGED_IN_KEY, 'true');
     }
 }
