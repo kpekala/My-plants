@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-navigation',
@@ -7,6 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NavigationComponent {
 
-  public constructor() {}
+  public constructor(private authService: AuthService) {}
 
+  onSignOutClick() {
+    this.authService.signOut();
+  }
 }

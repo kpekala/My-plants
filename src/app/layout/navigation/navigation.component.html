@@ -1,13 +1,27 @@
 <nav class="navbar navbar-dark navbar-expand custom-nav">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">My plants</a>
-      <ul class="navbar-nav" style="width: 100%;">
-        <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/app/home" class="nav-link" routerLinkActive="active">Home</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a routerLink="/app/find" class="nav-link" routerLinkActive="active">Find</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">My plants</a>
+    <ul class="navbar-nav" style="width: 100%;">
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/app/home" class="nav-link" routerLinkActive="active">Home</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a routerLink="/app/find" class="nav-link" routerLinkActive="active">Find</a>
+      </li>
+    </ul>
+    <span style="margin-left: auto; margin-right: 1rem;">
+      <div class="dropdown">
+        <i class="material-icons icon-button" role="button"
+          id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          more_vert
+        </i>
+        <ul class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="dropdownMenuButton1">
+          <li (click)="onSignOutClick()" style="cursor: pointer">
+            Sign out
+          </li>
+        </ul>
+       </div>
+    </span>
+  </div>
+</nav>
