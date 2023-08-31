@@ -1,4 +1,4 @@
-<div class="login-container container-fluid shadow p-3 bg-body rounded">
+<div class="login-form-container container-fluid shadow p-3 bg-body rounded">
     <div class="row mb-4 mt-2">
         <div class="col-12">
             <h1 class="text-center app-title">My plants</h1>
@@ -9,18 +9,18 @@
         <input [(ngModel)]="email" type="email" id="form2Example1" class="form-control" />
         <label class="form-label" for="form2Example1">Email address</label>
     </div>
-    
+
     <!-- Password input -->
     <div class="form-outline mb-4">
         <input [(ngModel)]="password" type="password" id="form2Example2" class="form-control" />
         <label class="form-label" for="form2Example2">Password</label>
     </div>
-    
+
     <div class="button-container">
-        <button type="button" (click)="onRegisterButtonClicked()" 
+        <button type="button" (click)="onRegisterButtonClicked()"
         class="btn btn-primary btn-block mb-4 btn-bd-primary">Sign up</button>
     </div>
-    
+
     <div class="text-center">
         <p>Already a member? <a routerLink="../login">Log in</a></p>
     </div>

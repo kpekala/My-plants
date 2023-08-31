@@ -1,27 +1,46 @@
-<div class="login-container container-fluid shadow p-3 bg-body rounded">
-    <div class="row mb-4 mt-2">
-        <div class="col-12">
-            <h1 class="text-center app-title">My plants</h1>
-        </div>
+<div class="login-form-container container-fluid shadow p-3 bg-body rounded">
+  <div class="row mb-4 mt-2">
+    <div class="col-12">
+      <h1 class="text-center app-title">My plants</h1>
     </div>
-      <!-- Email input -->
-      <div class="form-outline mb-4">
-          <input [(ngModel)]="email" type="email" id="form2Example1" class="form-control"/>
-          <label class="form-label" for="form2Example1">Email address</label>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="onLoginButtonClicked()">
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form2Example1">Email address</label>
+      <input type="email"
+             id="form2Example1"
+             class="form-control"
+             formControlName="email"/>
+      <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+           class="form-text" style="color: darkred">
+        Please choose an email.
       </div>
-      
-      <!-- Password input -->
-      <div class="form-outline mb-4">
-          <input [(ngModel)]="password" type="password" id="form2Example2" class="form-control" />
-          <label class="form-label" for="form2Example2">Password</label>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form2Example2">Password</label>
+      <input type="password"
+             id="form2Example2"
+             class="form-control"
+              formControlName="password"/>
+      <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
+      class="form-text" style="color: darkred">
+        Please choose a password.
       </div>
-      
-      <div class="button-container">
-          <button type="button" (click)="onLoginButtonClicked()"
-          class="btn btn-primary btn-block mb-4 btn-bd-primary">Sign in</button>
-      </div>
-      
-      <div class="text-center">
-          <p>Not a member? <a routerLink="../register">Register</a></p>
-      </div>
+    </div>
+
+    <div class="button-container">
+      <button type="submit"
+              class="btn btn-primary btn-block mb-4 btn-bd-primary"
+              [disabled]="loginForm.invalid && loginForm.touched">Sign in
+      </button>
+    </div>
+  </form>
+
+
+  <div class="text-center">
+    <p>Not a member? <a routerLink="../register">Register</a></p>
+  </div>
 </div>
