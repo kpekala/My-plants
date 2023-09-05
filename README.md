@@ -20,15 +20,20 @@
 
 - Add simple navigation bar ✅
 
-- [Find view] Show mocked plant species
+- [Find view] Show mocked plant species ✅
     - Create types service with mocked data ✅
     - Create type component with simple design ✅
-- [Authentication] Add possibility for user to login/register
-    - Create simple view for logging in
-    - login via firebase and move to main app layout
+- [Authentication] Add possibility for user to login/register ✅
+    - Create simple view for logging in ✅
+    - login via firebase and move to main app layout ✅
 - [Add plant view] Add plant type view
     - Add button in find-component to add plant type
     - create dialog for adding new type
+    - create a plant type and save it to the backend
+- [Plant database] Add fetching plants from backend
+    - create about 10 plants in firestore
+    - fetch them
+    - show them in the view
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
