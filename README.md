@@ -26,10 +26,14 @@
 - [Authentication] Add possibility for user to login/register ✅
     - Create simple view for logging in ✅
     - login via firebase and move to main app layout ✅
-- [Plant database] Add fetching plant species from backend
-    - create about 10 plants in firestore
-    - fetch them
-    - show them in the view
+- [Plant database] Add fetching plant species from backend ✅
+    - create about 10 plants in firestore ✅
+    - fetch them ✅
+    - show them in the view ✅
+- [Plant view] Add view of the single species
+    - create design with mocked data
+    - add button opening/closing the view 
+    - connect view with real data
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
 
