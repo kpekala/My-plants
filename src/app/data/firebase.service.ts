@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import {FirebaseApp, initializeApp} from "firebase/app"
+import {getFirestore} from "firebase/firestore";
 
 @Injectable({providedIn: 'root'})
 export class FirebaseService {
@@ -13,12 +14,15 @@ export class FirebaseService {
         appId: "1:995838760830:web:7f3809120cd23d3edd852f"
     };
 
-    app: FirebaseApp | undefined;
+    app: FirebaseApp;
+    db: any;
 
     constructor(){
-        this.initFirebase();
-    }
-    initFirebase(){
         this.app = initializeApp(this.firebaseConfig);
+        this.db = getFirestore(this.app);
+    }
+
+    getFirestore(){
+        return this.db;
     }
 }

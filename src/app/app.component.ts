@@ -9,13 +9,11 @@ import { FirebaseService } from './data/firebase.service';
 })
 export class AppComponent implements OnInit {
 
-
     constructor(private authService: AuthService, private firebaseService: FirebaseService){
 
     }
 
     ngOnInit(): void {
     }
-
 
 }

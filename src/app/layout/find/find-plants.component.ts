@@ -16,10 +16,10 @@ export class FindPlantsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.findPlantsService.findPlants()
-      .then((plantTypes: PlantType[]) =>{
-        this.plantTypes = plantTypes;
-        console.log(plantTypes)
-      });
+    this.findPlantsService.fetchPlants().subscribe({
+      next: (species: PlantType[]) => {
+        this.plantTypes = species;
+      }
+    }); 
   }
 }

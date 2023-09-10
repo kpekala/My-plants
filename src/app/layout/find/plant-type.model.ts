@@ -5,6 +5,5 @@ export class PlantType {
         public imageUrl: string,
         public ownersCount: number,
         public family: string) {
-
     }
 }
