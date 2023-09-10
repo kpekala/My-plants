@@ -26,11 +26,7 @@
 - [Authentication] Add possibility for user to login/register ✅
     - Create simple view for logging in ✅
     - login via firebase and move to main app layout ✅
-- [Add plant view] Add plant type view
-    - Add button in find-component to add plant type
-    - create dialog for adding new type
-    - create a plant type and save it to the backend
-- [Plant database] Add fetching plants from backend
+- [Plant database] Add fetching plant species from backend
     - create about 10 plants in firestore
     - fetch them
     - show them in the view
