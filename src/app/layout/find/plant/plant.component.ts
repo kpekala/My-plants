@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { PlantType } from '../plant-type.model';
+import { Species } from '../species.model';
+import { FindPlantsService } from '../species.service';
 
 @Component({
   selector: 'app-plant',
@@ -7,5 +8,9 @@ import { PlantType } from '../plant-type.model';
   styleUrls: ['./plant.component.scss']
 })
 export class PlantComponent {
-  @Input() plant!: PlantType;
+  @Input() plant!: Species;
+
+  constructor(private findPlantsService: FindPlantsService){
+
+  }
 }

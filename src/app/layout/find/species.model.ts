@@ -1,4 +1,4 @@
-export class PlantType {
+export class Species {
 
     constructor(
         public speciesName: string,

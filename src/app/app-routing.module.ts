@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
-import { FindPlantsComponent } from './layout/find/find-plants.component';
+import { FindPlantsComponent } from './layout/find/species.component';
 import {LayoutComponent} from "./layout/layout.component";
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';

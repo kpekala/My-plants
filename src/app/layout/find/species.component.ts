@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FindPlantsService } from './find-plants.service';
-import { PlantType } from './plant-type.model';
+import { FindPlantsService } from './species.service';
+import { Species } from './species.model';
 
 @Component({
   selector: 'app-find-plants',
-  templateUrl: './find-plants.component.html',
-  styleUrls: ['./find-plants.component.scss']
+  templateUrl: './species.component.html',
+  styleUrls: ['./species.component.scss']
 })
 export class FindPlantsComponent implements OnInit{
 
-  plantTypes: PlantType[] = [];
+  plantTypes: Species[] = [];
 
   constructor (private findPlantsService: FindPlantsService){
 
@@ -17,7 +17,7 @@ export class FindPlantsComponent implements OnInit{
 
   ngOnInit(): void {
     this.findPlantsService.fetchPlants().subscribe({
-      next: (species: PlantType[]) => {
+      next: (species: Species[]) => {
         this.plantTypes = species;
       }
     }); 
