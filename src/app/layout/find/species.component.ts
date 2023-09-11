@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FindPlantsService } from './species.service';
+import { SpeciesService } from './species.service';
 import { Species } from './species.model';
 
 @Component({
@@ -11,7 +11,9 @@ export class FindPlantsComponent implements OnInit{
 
   plantTypes: Species[] = [];
 
-  constructor (private findPlantsService: FindPlantsService){
+  showModal = false;
+
+  constructor (private findPlantsService: SpeciesService){
 
   }
 

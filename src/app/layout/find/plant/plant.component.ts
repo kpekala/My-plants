@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Species } from '../species.model';
-import { FindPlantsService } from '../species.service';
+import { SpeciesService } from '../species.service';
 
 @Component({
   selector: 'app-plant',
@@ -10,7 +10,11 @@ import { FindPlantsService } from '../species.service';
 export class PlantComponent {
   @Input() plant!: Species;
 
-  constructor(private findPlantsService: FindPlantsService){
+  constructor(private speciesService: SpeciesService){
 
+  }
+
+  onShowDetails(){
+    this.speciesService.onShowRecipeDetails(this.plant);
   }
 }

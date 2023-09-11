@@ -4,4 +4,8 @@
             <app-plant [plant]="plant"></app-plant>
         </div>
     </div>
+    <div class="plant-modal-container" *ngIf="showModal">
+        <app-plant-modal>
+        </app-plant-modal>
+    </div>
 </div>

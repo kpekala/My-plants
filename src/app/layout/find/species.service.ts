@@ -6,11 +6,9 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({
     providedIn: 'root'
 })
-export class FindPlantsService{
+export class SpeciesService{
 
     private speciesUrl = 'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/species.json';
-
-    private plantTypes: Species[] = [];
 
     private showRecipeDetails = new Subject<Species>();
 
