@@ -9,4 +9,9 @@ import { Species } from '../species.model';
 export class PlantModalComponent {
   
   @Input() plant!: Species;
+  @Output() closeModal = new EventEmitter();
+
+  onClose(){
+    this.closeModal.emit();
+  }
 }

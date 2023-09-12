@@ -34,4 +34,9 @@ export class FindPlantsComponent implements OnInit{
     this.selectedSpecies = species;
     this.showModal = true;
   }
+  
+  onCloseDetails(){
+    this.selectedSpecies = null;
+    this.showModal = false;
+  }
 }

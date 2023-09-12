@@ -6,7 +6,9 @@
         </div>
     </div>
     <div class="plant-modal-container" *ngIf="showModal">
-        <app-plant-modal [plant]="selectedSpecies">
+        <app-plant-modal 
+            [plant]="selectedSpecies"
+            (closeModal)="onCloseDetails()">
         </app-plant-modal>
     </div>
 </div>
