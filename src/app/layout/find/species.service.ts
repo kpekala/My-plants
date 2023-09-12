@@ -10,16 +10,10 @@ export class SpeciesService{
 
     private speciesUrl = 'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/species.json';
 
-    private showRecipeDetails = new Subject<Species>();
-
-     constructor(private http: HttpClient){
+    constructor(private http: HttpClient){
     }
 
     fetchPlants(): Observable<Species[]>{
         return this.http.get<Species[]>(this.speciesUrl);
-    }
-
-    onShowRecipeDetails(plant: Species){
-        this.showRecipeDetails.next(plant);
     }
 }

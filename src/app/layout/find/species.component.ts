@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeciesService } from './species.service';
 import { Species } from './species.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-find-plants',
@@ -9,19 +10,28 @@ import { Species } from './species.model';
 })
 export class FindPlantsComponent implements OnInit{
 
-  plantTypes: Species[] = [];
+  species: Species[] = [];
+
+  speciesDetailsSub: Subscription;
 
   showModal = false;
 
-  constructor (private findPlantsService: SpeciesService){
+  selectedSpecies = null;
+
+  constructor (private speciesService: SpeciesService){
 
   }
 
   ngOnInit(): void {
-    this.findPlantsService.fetchPlants().subscribe({
+    this.speciesService.fetchPlants().subscribe({
       next: (species: Species[]) => {
-        this.plantTypes = species;
+        this.species = species;
       }
-    }); 
+    });
+  }
+
+  onShowDetails(species: Species){
+    this.selectedSpecies = species;
+    this.showModal = true;
   }
 }

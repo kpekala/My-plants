@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Species } from '../species.model';
 import { SpeciesService } from '../species.service';
 
@@ -9,12 +9,13 @@ import { SpeciesService } from '../species.service';
 })
 export class PlantComponent {
   @Input() plant!: Species;
+  @Output() showDetails = new EventEmitter<Species>();
 
   constructor(private speciesService: SpeciesService){
 
   }
 
   onShowDetails(){
-    this.speciesService.onShowRecipeDetails(this.plant);
+    this.showDetails.emit(this.plant)
   }
 }
