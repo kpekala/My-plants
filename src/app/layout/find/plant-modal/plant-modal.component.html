@@ -1,16 +1,18 @@
-<div class="card plant-modal-container">
-    <img [src]="plant.imageUrl" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{plant.speciesName}}</h5>
-      <p class="card-text">{{plant.description}}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Popularity: {{plant.ownersCount}}</li>
-    </ul>
-    <div class="card-body">
-      <a href="{{plant.link}}" class="card-link">Link to Wikipedia</a>
-      <button 
-        class="btn btn-secondary" 
-        (click)="onClose()">Close</button>
-    </div>
+<div class="plant-modal-container">
+  <div class="card plant-modal-card">
+      <img [src]="plant.imageUrl" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{plant.speciesName}}</h5>
+        <p class="card-text">{{plant.description}}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Popularity: {{plant.ownersCount}}</li>
+      </ul>
+      <div class="card-body">
+        <a href="{{plant.link}}" class="card-link">Link to Wikipedia</a>
+        <button 
+          class="btn btn-secondary" 
+          (click)="onClose()">Close</button>
+      </div>
+  </div>
 </div>

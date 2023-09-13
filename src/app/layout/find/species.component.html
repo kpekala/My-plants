@@ -5,10 +5,9 @@
             </app-plant>
         </div>
     </div>
-    <div class="plant-modal-container" *ngIf="showModal">
-        <app-plant-modal 
-            [plant]="selectedSpecies"
-            (closeModal)="onCloseDetails()">
-        </app-plant-modal>
-    </div>
+    <app-plant-modal  
+        *ngIf="showModal"
+        [plant]="selectedSpecies"
+        (closeModal)="onCloseDetails()">
+    </app-plant-modal>
 </div>
