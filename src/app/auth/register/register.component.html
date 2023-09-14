@@ -6,11 +6,11 @@
     </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="onLoginButtonClicked()">
+    
     <!-- Email input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="form2Example1">Email address</label>
+      <label class="form-label">Email address</label>
       <input type="email"
-             id="form2Example1"
              class="form-control"
              formControlName="email"/>
       <div *ngIf="registerForm.get('email').invalid && registerForm.get('email').touched"
@@ -19,11 +19,23 @@
       </div>
     </div>
 
+    <!-- Username input -->
+  <div class="form-outline mb-4">
+    <label class="form-label">Username</label>
+    <input type="text"
+          class="form-control"
+          formControlName="username"/>
+    <div *ngIf="registerForm.get('username').invalid && registerForm.get('username').touched"
+        class="form-text" style="color: darkred">
+      Please choose a username.
+    </div>
+  </div>
+
+
     <!-- Password input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="form2Example2">Password</label>
+      <label class="form-label">Password</label>
       <input type="password"
-             id="form2Example2"
              class="form-control"
              formControlName="password"/>
       <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched"
@@ -35,12 +47,12 @@
     <div class="button-container">
       <button type="submit"
               class="btn btn-primary btn-block mb-4 btn-bd-primary"
-              [disabled]="registerForm.invalid && registerForm.touched">Sign up
+              [disabled]="registerForm.invalid">Sign up
       </button>
     </div>
   </form>
 
   <div class="text-center">
-    <p>Not a member? <a routerLink="../register">Log in</a></p>
+    <p>Already a member? <a routerLink="../register">Log in</a></p>
   </div>
 </div>

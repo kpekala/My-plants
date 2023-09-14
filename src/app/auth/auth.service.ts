@@ -42,11 +42,6 @@ export class AuthService {
         const user = userCredential.user;
         localStorage.setItem(this.USER_LOGGED_IN_KEY, 'true');
         console.log(`User ${user} is created`);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(`User failed to log in. Reason: ${errorMessage}`);
-        return error;
       });
   }
 

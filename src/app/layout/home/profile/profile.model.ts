@@ -2,7 +2,7 @@ export class Profile {
 
     constructor(
         public email: string,
-        public userName: string,
+        public username: string,
         public imagePath: string) {
     }
 }
