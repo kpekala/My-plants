@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { homeGuard } from './layout/home/home-guard';
 import { RegisterComponent } from './auth/register/register.component';
 import { authGuard } from './auth/auth-guard';
+import { profileResolver } from './layout/home/profile/profile-resolver';
 
 const routes: Routes = [
 
@@ -18,7 +19,7 @@ const routes: Routes = [
 	canActivate: [homeGuard],
 	children: [
 		{path: '', pathMatch: 'full', redirectTo: 'home'},
-		{path: 'home', component: HomeComponent},
+		{path: 'home', component: HomeComponent, resolve: [profileResolver]},
 		{path: 'find', component: FindPlantsComponent}
 	]
   },

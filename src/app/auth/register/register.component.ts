@@ -29,9 +29,9 @@ export class RegisterComponent implements OnInit{
     const password = this.registerForm.get('password').value;
     const username = this.registerForm.get('username').value;
     this.authService.register(email, password)
-      .then(() => {
-        this.profileService.createProfile(username, email).subscribe(
-          {
+      .then(async () => {
+        const userToken = this.authService.getUserToken();
+        this.profileService.createProfile(userToken, username, email).subscribe({
             next: () => {
               this.registerForm.reset();
               this.router.navigate(['app/home']);

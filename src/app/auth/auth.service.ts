@@ -12,7 +12,8 @@ export class AuthService {
 
   private USER_LOGGED_IN_KEY = "USER_LOGGED_IN_KEY";
 
-  constructor(private localStorageService: LocalStorageService, private router: Router, private firebaseService: FirebaseService) {
+  constructor(private localStorageService: LocalStorageService, 
+    private router: Router, private firebaseService: FirebaseService) {
     this.registerUserStateChangeListener();
   }
 
@@ -62,5 +63,9 @@ export class AuthService {
         this.router.navigate(['auth/login']);
       }
     });
+  }
+
+  getUserToken(){
+    return getAuth().currentUser.uid;
   }
 }

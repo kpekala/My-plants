@@ -1,0 +1,21 @@
+@import '../../../../scss/styles.scss';
+
+.image-container{
+    justify-content: center; 
+    display: flex;
+    padding-top: 2rem;
+}
+
+img {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    border: 2px solid $primary;
+    background-color: #CCCCCC;
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 1rem;
+}

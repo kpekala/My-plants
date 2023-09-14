@@ -1,19 +1,35 @@
 import { Injectable } from "@angular/core";
 import { Profile } from "./profile.model";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, map, tap } from "rxjs";
+import { getStorage, ref } from "firebase/storage";
+import { LocalStorageService } from "src/app/data/local-storage.service";
+import { AuthService } from "src/app/auth/auth.service";
 
 @Injectable({providedIn: 'root'})
 export class ProfileService{ 
 
-    private speciesUrl = 'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/profiles.json';
+    private profileUrl = 'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/profiles';
 
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient, 
+                private localStorageService: LocalStorageService,
+                private authService: AuthService){
 
     }
 
-    createProfile(username: string, email: string): Observable<any>{
+    createProfile(userId: string, username: string, email: string): Observable<any>{
         const newProfile = new Profile(email, username, '');
-        return this.http.put(this.speciesUrl, newProfile);
+        return this.http.post(`${this.profileUrl}/${userId}.json`, newProfile)
+            .pipe(tap((result) => {
+                this.localStorageService.saveData('profile-id',userId);
+            }));
+    }
+
+    getProfile(): Observable<any>{
+        const profileId = this.localStorageService.getData('profile-id');
+        return this.http.get<any>(`${this.profileUrl}/${profileId}.json`)
+                    .pipe(map((profileObject: Object) => {
+                        return Object.values(profileObject)[0];
+                    }));
     }
 }

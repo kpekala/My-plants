@@ -1,1 +1,19 @@
-<p>profile works!</p>
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="image-container col-12">
+                <img class="profile-image" [src]="imagePath"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>
+                    Username: {{profile.username}}
+                </h3>
+                <h3>
+                    Email: {{profile.email}}
+                </h3>
+            </div>
+        </div>
+    </div>
+</div>
