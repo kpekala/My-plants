@@ -14,6 +14,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PlantModalComponent } from './layout/find/plant-modal/plant-modal.component';
+import { ProfileComponent } from './layout/home/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PlantModalComponent } from './layout/find/plant-modal/plant-modal.compo
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    PlantModalComponent
+    PlantModalComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
