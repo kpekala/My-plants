@@ -26,8 +26,8 @@ export class ProfileService{
     }
 
     getProfile(): Observable<any>{
-        const profileId = this.localStorageService.getData('profile-id');
-        return this.http.get<any>(`${this.profileUrl}/${profileId}.json`)
+        const userId = this.authService.getUserId();
+        return this.http.get<any>(`${this.profileUrl}/${userId}.json`)
                     .pipe(map((profileObject: Object) => {
                         return profileObject;
                     }));
