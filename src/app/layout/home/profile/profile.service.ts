@@ -19,7 +19,7 @@ export class ProfileService{
 
     createProfile(userId: string, username: string, email: string): Observable<any>{
         const newProfile = new Profile(email, username, '');
-        return this.http.post(`${this.profileUrl}/${userId}.json`, newProfile)
+        return this.http.put(`${this.profileUrl}/${userId}.json`, newProfile)
             .pipe(tap((result) => {
                 this.localStorageService.saveData('profile-id',userId);
             }));
@@ -29,7 +29,14 @@ export class ProfileService{
         const profileId = this.localStorageService.getData('profile-id');
         return this.http.get<any>(`${this.profileUrl}/${profileId}.json`)
                     .pipe(map((profileObject: Object) => {
-                        return Object.values(profileObject)[0];
+                        return profileObject;
                     }));
+    }
+
+    updateProfile(profile: Profile) {
+        const userId = this.authService.getUserId();
+        return this.http.patch(`${this.profileUrl}/${userId}.json`, profile)
+            .pipe(tap((result) => {
+            }));
     }
 }

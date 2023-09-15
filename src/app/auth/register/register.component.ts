@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit{
     const username = this.registerForm.get('username').value;
     this.authService.register(email, password)
       .then(async () => {
-        const userToken = this.authService.getUserToken();
+        const userToken = this.authService.getUserId();
         this.profileService.createProfile(userToken, username, email).subscribe({
             next: () => {
               this.registerForm.reset();

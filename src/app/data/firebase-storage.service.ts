@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { FirebaseService } from "./firebase.service";
 
 @Injectable({providedIn: 'root'})
@@ -19,5 +19,16 @@ export class FirebaseStorageService {
 
     getDefaultProfileImageUrl(){
         return this.getImageDownloadUrl('profile/Placeholderportrait.jpg');
+    }
+
+    uploadImage(file: File){
+        const fileRef = ref(this.storage, `profile/${file.name}`);
+        return uploadBytes(fileRef, file).then(
+            (snapshot) => {
+                console.log('Uploaded a blob or file!');
+                console.log(snapshot);
+                return snapshot;
+            }
+        );
     }
 }

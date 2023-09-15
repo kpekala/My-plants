@@ -2,7 +2,14 @@
     <div class="col">
         <div class="row">
             <div class="image-container col-12">
-                <img class="profile-image" [src]="imagePath"/>
+                <img class="profile-image" [src]="imagePath" (click)="onImageClick()"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align: center;">
+                <input type="file" 
+                    (change)="onImageChosen($event)"
+                    *ngIf="showImageInput">
             </div>
         </div>
         <div class="row">

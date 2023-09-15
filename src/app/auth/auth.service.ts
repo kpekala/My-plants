@@ -13,12 +13,18 @@ export class AuthService {
   private USER_LOGGED_IN_KEY = "USER_LOGGED_IN_KEY";
 
   constructor(private localStorageService: LocalStorageService, 
-    private router: Router, private firebaseService: FirebaseService) {
+    private router: Router, 
+    private firebaseService: FirebaseService) {
     this.registerUserStateChangeListener();
+    console.log(firebaseService.app);
   }
 
   isLoggedIn(): Observable<boolean> {
-    return of(this.localStorageService.getData(this.USER_LOGGED_IN_KEY) != null);
+    return new Observable(subscriber => {
+      getAuth().onAuthStateChanged(user => {
+        subscriber.next(user != null);
+      });
+    });
   }
 
   login(email: string, password: string) {
@@ -26,7 +32,6 @@ export class AuthService {
     return signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        localStorage.setItem(this.USER_LOGGED_IN_KEY, 'true');
         console.log(`User ${user} is logged in`);
       })
       .catch((error) => {
@@ -41,7 +46,6 @@ export class AuthService {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        localStorage.setItem(this.USER_LOGGED_IN_KEY, 'true');
         console.log(`User ${user} is created`);
       });
   }
@@ -65,7 +69,7 @@ export class AuthService {
     });
   }
 
-  getUserToken(){
+  getUserId(){
     return getAuth().currentUser.uid;
   }
 }
