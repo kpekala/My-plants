@@ -6,6 +6,7 @@ export class Species {
         public ownersCount: number,
         public family: string,
         public description: string,
-        public link: string) {
+        public link: string,
+        public id: number) {
     }
 }

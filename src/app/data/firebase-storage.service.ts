@@ -25,8 +25,6 @@ export class FirebaseStorageService {
         const fileRef = ref(this.storage, `profile/${file.name}`);
         return uploadBytes(fileRef, file).then(
             (snapshot) => {
-                console.log('Uploaded a blob or file!');
-                console.log(snapshot);
                 return snapshot;
             }
         );

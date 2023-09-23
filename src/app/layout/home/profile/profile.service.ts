@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Profile } from "./profile.model";
 import { HttpClient } from "@angular/common/http";
-import { Observable, map, tap } from "rxjs";
+import { Observable, map, switchMap, tap } from "rxjs";
 import { getStorage, ref } from "firebase/storage";
 import { LocalStorageService } from "src/app/data/local-storage.service";
 import { AuthService } from "src/app/auth/auth.service";
@@ -35,8 +35,18 @@ export class ProfileService{
 
     updateProfile(profile: Profile) {
         const userId = this.authService.getUserId();
-        return this.http.patch(`${this.profileUrl}/${userId}.json`, profile)
-            .pipe(tap((result) => {
-            }));
+        console.log(profile);
+        return this.http.patch(`${this.profileUrl}/${userId}.json`, profile);
+    }
+
+    addSpeciesToCollection(speciesId: number) {
+        return this.getProfile().pipe(
+            map((profile: Profile) => {
+                const collection = profile.collection ? profile.collection : [];
+                collection.push(speciesId);
+                profile.collection = collection;
+                return profile;
+            }),
+            switchMap((profile: Profile) => this.updateProfile(profile)));
     }
 }
