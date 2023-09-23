@@ -11,6 +11,7 @@ import { ProfileService } from '../../home/profile/profile.service';
 export class PlantModalComponent {
   
   @Input() plant!: Species;
+  @Input() isCollectionItem: boolean;
   @Output() closeModal = new EventEmitter();
 
   constructor(private profileService: ProfileService) {}
@@ -27,6 +28,18 @@ export class PlantModalComponent {
         },
         error: () => {
           alert('Error adding species to collection!');
+        }
+      });
+  }
+
+  onRemoveFromCollection() {
+    this.profileService.removeSpeciesFromCollection(this.plant.id)
+      .subscribe({
+        next: () => {
+          alert('Species removed from collection!');
+        },
+        error: () => {
+          alert('Error removing species to collection!');
         }
       });
   }

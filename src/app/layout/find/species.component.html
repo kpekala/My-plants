@@ -10,6 +10,7 @@
     <app-plant-modal  
         *ngIf="showModal"
         [plant]="selectedSpecies"
+        [isCollectionItem]="isCollection"
         (closeModal)="onCloseDetails()">
     </app-plant-modal>
 </div>

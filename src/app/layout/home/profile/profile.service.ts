@@ -49,4 +49,18 @@ export class ProfileService{
             }),
             switchMap((profile: Profile) => this.updateProfile(profile)));
     }
+
+    removeSpeciesFromCollection(speciesId: number) {
+        return this.getProfile().pipe(
+            map((profile: Profile) => {
+                const collection = profile.collection ? profile.collection : [];
+                const index = collection.indexOf(speciesId);
+                if(index !== -1) {
+                    collection.splice(index, 1);
+                }
+                profile.collection = collection;
+                return profile;
+            }),
+            switchMap((profile: Profile) => this.updateProfile(profile)));
+    }
 }

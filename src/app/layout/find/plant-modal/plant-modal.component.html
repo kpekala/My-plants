@@ -14,9 +14,15 @@
           class="btn btn-secondary" 
           (click)="onClose()">Close</button>
           <button 
-          class="btn btn-primary" 
-          style="margin-right: 1rem;"
-          (click)="onAddToCollection()">Add to collection</button>
+            *ngIf="!isCollectionItem"
+            class="btn btn-primary" 
+            style="margin-right: 1rem;"
+            (click)="onAddToCollection()">Add to collection</button>
+            <button 
+            *ngIf="isCollectionItem"
+            class="btn btn-danger" 
+            style="margin-right: 1rem;"
+            (click)="onRemoveFromCollection()">Remove from collection</button>
       </div>
   </div>
 </div>
