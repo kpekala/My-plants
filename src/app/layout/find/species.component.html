@@ -11,6 +11,7 @@
         *ngIf="showModal"
         [plant]="selectedSpecies"
         [isCollectionItem]="isCollection"
-        (closeModal)="onCloseDetails()">
+        (closeModal)="onCloseDetails()"
+        (onItemRemovedFromCollection)="onItemRemovedFromCollection()">
     </app-plant-modal>
 </div>

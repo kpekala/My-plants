@@ -28,6 +28,10 @@ export class FindPlantsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.reloadSpecies();
+  }
+
+  reloadSpecies() {
     this.speciesService.fetchPlants().pipe(
       tap((species: Species[]) => {
         this.species = species;
@@ -38,7 +42,7 @@ export class FindPlantsComponent implements OnInit{
         next: (profile: Profile) => {
           this.profile = profile;
         }
-      })
+      });
   }
 
   onShowDetails(species: Species){
@@ -57,5 +61,9 @@ export class FindPlantsComponent implements OnInit{
     if(!this.isCollection || !this.profile)
       return true;
     return this.profile.collection.includes(id);
+  }
+
+  onItemRemovedFromCollection() {
+    this.reloadSpecies();
   }
 }
