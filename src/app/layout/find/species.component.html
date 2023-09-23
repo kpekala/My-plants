@@ -1,9 +1,11 @@
 <div class="find-plants-container">
     <div class="plants-container">
-        <div *ngFor="let plant of species">
-            <app-plant [plant]="plant" (showDetails)="onShowDetails(plant)">
-            </app-plant>
-        </div>
+        <ng-container *ngFor="let plant of species; index as i">
+            <div *ngIf="showItem(i)" >
+                <app-plant [plant]="plant" (showDetails)="onShowDetails(plant)">
+                </app-plant>
+            </div>
+        </ng-container>
     </div>
     <app-plant-modal  
         *ngIf="showModal"

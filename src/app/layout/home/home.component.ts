@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe((profile: Profile) => {
+    this.activatedRoute.data.subscribe(data => {
       // my weird workaround :|
-      this.profile = profile[0];
+      this.profile = data[0];
     });
   }
 }

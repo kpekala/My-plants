@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SpeciesService } from './species.service';
 import { Species } from './species.model';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap, tap } from 'rxjs';
+import { ProfileService } from '../home/profile/profile.service';
+import { Profile } from '../home/profile/profile.model';
+import { collection } from 'firebase/firestore';
 
 @Component({
   selector: 'app-find-plants',
@@ -10,24 +13,32 @@ import { Subscription } from 'rxjs';
 })
 export class FindPlantsComponent implements OnInit{
 
+  @Input() isCollection: boolean = false;
+
   species: Species[] = [];
-
   speciesDetailsSub: Subscription;
-
   showModal = false;
-
   selectedSpecies = null;
 
-  constructor (private speciesService: SpeciesService){
+  profile: Profile = null;
+
+  constructor (private speciesService: SpeciesService, 
+               private profileService: ProfileService){
 
   }
 
   ngOnInit(): void {
-    this.speciesService.fetchPlants().subscribe({
-      next: (species: Species[]) => {
+    this.speciesService.fetchPlants().pipe(
+      tap((species: Species[]) => {
         this.species = species;
-      }
-    });
+      }),
+      switchMap((species: Species[]) => {
+        return this.profileService.getProfile();
+      })).subscribe({
+        next: (profile: Profile) => {
+          this.profile = profile;
+        }
+      })
   }
 
   onShowDetails(species: Species){
@@ -38,5 +49,13 @@ export class FindPlantsComponent implements OnInit{
   onCloseDetails(){
     this.selectedSpecies = null;
     this.showModal = false;
+  }
+
+  showItem(id: number): boolean {
+    if(this.isCollection && !this.profile) 
+      return false;
+    if(!this.isCollection || !this.profile)
+      return true;
+    return this.profile.collection.includes(id);
   }
 }
