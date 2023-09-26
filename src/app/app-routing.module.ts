@@ -4,9 +4,8 @@ import { HomeComponent } from './layout/home/home.component';
 import { FindPlantsComponent } from './layout/find/species.component';
 import {LayoutComponent} from "./layout/layout.component";
 import { AuthComponent } from './auth/auth.component';
-import { LoginComponent } from './auth/login/login.component';
 import { homeGuard } from './layout/home/home-guard';
-import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth-guard';
 import { profileResolver } from './layout/home/profile/profile-resolver';
 
@@ -28,9 +27,7 @@ const routes: Routes = [
 	component: AuthComponent,
 	canActivate: [authGuard],
 	children: [
-		{path: 'login', component: LoginComponent},
-		{path: 'register', component: RegisterComponent},
-		{path: '', pathMatch: 'full', redirectTo: 'login'}
+		{path: '', component: LoginComponent, data: {'isLoginView': true}}
 	]
   },
   {path: '**', redirectTo: 'auth'}

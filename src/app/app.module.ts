@@ -10,7 +10,6 @@ import {HomeComponent} from "./layout/home/home.component";
 import {NavigationComponent} from "./layout/navigation/navigation.component";
 import { AuthComponent } from './auth/auth.component';
 import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PlantModalComponent } from './layout/find/plant-modal/plant-modal.component';
@@ -28,7 +27,6 @@ import { AlertComponent } from './shared/alert/alert.component';
     LayoutComponent,
     AuthComponent,
     LoginComponent,
-    RegisterComponent,
     PlantModalComponent,
     ProfileComponent,
     SpinnerComponent,

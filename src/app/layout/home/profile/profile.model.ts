@@ -4,6 +4,6 @@ export class Profile {
         public email: string,
         public username: string,
         public imagePath: string,
-        public collection?: number[]) {
+        public collection: number[]) {
     }
 }

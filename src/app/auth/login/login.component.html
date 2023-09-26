@@ -1,33 +1,46 @@
 <div class="login-form-container container-fluid shadow p-3 bg-body rounded">
   <app-alert [message]="error" *ngIf="error != null" (close)="onCloseAlert()"></app-alert>
+  
   <div class="row mb-4 mt-2">
-    <div class="col-12">
-      <h1 class="text-center app-title">My plants</h1>
+        <div class="col-12">
+            <h1 class="text-center app-title">My plants</h1>
+        </div>
     </div>
-  </div>
-  <form [formGroup]="loginForm" (ngSubmit)="onLoginButtonClicked()">
+
+  <form [formGroup]="authForm" (ngSubmit)="onAuthButtonClicked()">
+    
     <!-- Email input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="form2Example1">Email address</label>
+      <label class="form-label">Email address</label>
       <input type="email"
-             id="form2Example1"
              class="form-control"
              formControlName="email"/>
-      <div *ngIf="loginForm.get('email').invalid && loginForm.get('email').touched"
+      <div *ngIf="authForm.get('email').invalid && authForm.get('email').touched"
            class="form-text" style="color: darkred">
         Please choose an email.
       </div>
     </div>
 
+    <!-- Username input -->
+    <div class="form-outline mb-4" *ngIf="!isLoginView">
+      <label class="form-label">Username</label>
+      <input type="text"
+            class="form-control"
+            formControlName="username"/>
+      <div *ngIf="authForm.get('username').invalid && authForm.get('username').touched"
+          class="form-text" style="color: darkred">
+        Please choose a username.
+      </div>
+    </div>
+
     <!-- Password input -->
     <div class="form-outline mb-4">
-      <label class="form-label" for="form2Example2">Password</label>
+      <label class="form-label">Password</label>
       <input type="password"
-             id="form2Example2"
              class="form-control"
-              formControlName="password"/>
-      <div *ngIf="loginForm.get('password').invalid && loginForm.get('password').touched"
-      class="form-text" style="color: darkred">
+             formControlName="password"/>
+      <div *ngIf="authForm.get('password').invalid && authForm.get('password').touched"
+           class="form-text" style="color: darkred">
         Please choose a password.
       </div>
     </div>
@@ -35,13 +48,24 @@
     <div class="button-container">
       <span>
         <button type="submit"
-          class="btn btn-primary btn-block mb-4 btn-bd-primary"
-          [disabled]="loginForm.invalid">Sign in</button>
-          <app-spinner *ngIf="isLoading"></app-spinner>
+        class="btn btn-primary btn-block mb-4 btn-bd-primary"
+        [disabled]="authForm.invalid">
+          {{isLoginView ? 'Login' : 'Sign up'}}
+        </button>
+        <app-spinner *ngIf="isLoading"></app-spinner>
       </span>
     </div>
   </form>
+
   <div class="text-center">
-    <p>Not a member? <a routerLink="../register">Register</a></p>
+    <p>
+      {{isLoginView ? "Not a member?": "Already a member?"}} 
+      <button 
+        (click)="onChangeLoginType()"
+        class="btn btn-secondary"
+        style="margin-left: 1rem;">
+        {{isLoginView ? "Sign up" : "Login"}}
+      </button>
+    </p>
   </div>
 </div>

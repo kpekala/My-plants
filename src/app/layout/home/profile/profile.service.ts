@@ -18,7 +18,7 @@ export class ProfileService{
     }
 
     createProfile(userId: string, username: string, email: string): Observable<any>{
-        const newProfile = new Profile(email, username, '');
+        const newProfile = new Profile(email, username, '', []);
         return this.http.put(`${this.profileUrl}/${userId}.json`, newProfile)
             .pipe(tap((result) => {
                 this.localStorageService.saveData('profile-id',userId);
