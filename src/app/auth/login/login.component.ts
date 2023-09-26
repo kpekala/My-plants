@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit{
           }
         );
       }).catch(error => {
-        console.log(error);
+        this.error = 'Failed to sign up!';
         this.isLoading = false;
       });
   }
