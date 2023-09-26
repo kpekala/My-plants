@@ -11,6 +11,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -22,12 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginButtonClicked(){
+    this.isLoading = true;
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
     this.authService.login(email, password)
       .then(() => {
         this.loginForm.reset();
         this.router.navigate(['app/home']);
+        this.isLoading = false;
       });
   }
 }

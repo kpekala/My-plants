@@ -11,6 +11,7 @@ import { ProfileService } from 'src/app/layout/home/profile/profile.service';
 })
 export class RegisterComponent implements OnInit{
   registerForm: FormGroup;
+  isLoading = false;
 
   constructor(private authService: AuthService, 
               private router: Router,
@@ -25,6 +26,8 @@ export class RegisterComponent implements OnInit{
   }
 
   onLoginButtonClicked(){
+    this.isLoading = true;
+
     const email = this.registerForm.get('email').value;
     const password = this.registerForm.get('password').value;
     const username = this.registerForm.get('username').value;
@@ -33,6 +36,7 @@ export class RegisterComponent implements OnInit{
         const userToken = this.authService.getUserId();
         this.profileService.createProfile(userToken, username, email).subscribe({
             next: () => {
+              this.isLoading = false;
               this.registerForm.reset();
               this.router.navigate(['app/home']);
             }
@@ -40,6 +44,7 @@ export class RegisterComponent implements OnInit{
         );
       }).catch(error => {
         console.log(error);
+        this.isLoading = false;
       });
   }
 }

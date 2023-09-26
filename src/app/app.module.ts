@@ -15,6 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PlantModalComponent } from './layout/find/plant-modal/plant-modal.component';
 import { ProfileComponent } from './layout/home/profile/profile.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ProfileComponent } from './layout/home/profile/profile.component';
     LoginComponent,
     RegisterComponent,
     PlantModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    SpinnerComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
