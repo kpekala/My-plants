@@ -33,11 +33,6 @@ export class AuthService {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(`User ${user} is logged in`);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        console.log(`User failed to log in. Reason: ${errorMessage}`);
-        return error;
       });
   }
 

@@ -1,1 +1,7 @@
-<p>alert works!</p>
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+    {{message}}
+    <div class="alert-box-axtions">
+        <button class="btn btn-primary" style="margin-top: 1rem;" (click)="onClose()">Close</button>
+    </div>
+</div>

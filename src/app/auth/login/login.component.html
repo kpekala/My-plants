@@ -1,4 +1,5 @@
 <div class="login-form-container container-fluid shadow p-3 bg-body rounded">
+  <app-alert [message]="error" *ngIf="error != null" (close)="onCloseAlert()"></app-alert>
   <div class="row mb-4 mt-2">
     <div class="col-12">
       <h1 class="text-center app-title">My plants</h1>

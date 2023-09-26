@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isLoading = false;
+  error = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -31,6 +32,14 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset();
         this.router.navigate(['app/home']);
         this.isLoading = false;
+      })
+      .catch(error => {
+        this.error = 'Failed to log in!';
+        this.isLoading = false;
       });
+  }
+
+  onCloseAlert() {
+    this.error = null;
   }
 }
