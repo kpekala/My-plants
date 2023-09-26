@@ -11,7 +11,7 @@ import { collection } from 'firebase/firestore';
   templateUrl: './species.component.html',
   styleUrls: ['./species.component.scss']
 })
-export class FindPlantsComponent implements OnInit{
+export class SpeciesComponent implements OnInit{
 
   @Input() isCollection: boolean = false;
 

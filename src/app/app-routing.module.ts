@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
-import { FindPlantsComponent } from './layout/find/species.component';
 import {LayoutComponent} from "./layout/layout.component";
 import { AuthComponent } from './auth/auth.component';
 import { homeGuard } from './layout/home/home-guard';
 import { LoginComponent } from './auth/login/login.component';
 import { authGuard } from './auth/auth-guard';
 import { profileResolver } from './layout/home/profile/profile-resolver';
+import { SpeciesComponent } from './layout/species/species.component';
 
 const routes: Routes = [
 
@@ -19,7 +19,7 @@ const routes: Routes = [
 	children: [
 		{path: '', pathMatch: 'full', redirectTo: 'home'},
 		{path: 'home', component: HomeComponent, resolve: [profileResolver]},
-		{path: 'find', component: FindPlantsComponent}
+		{path: 'find', component: SpeciesComponent}
 	]
   },
   {
