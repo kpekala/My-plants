@@ -28,8 +28,10 @@ export class ProfileService{
     getProfile(): Observable<any>{
         const userId = this.authService.getUserId();
         return this.http.get<any>(`${this.profileUrl}/${userId}.json`)
-                    .pipe(map((profileObject: Object) => {
-                        return profileObject;
+                    .pipe(map((profile: Profile) => {
+                        if(!profile.collection)
+                            profile.collection = [];
+                        return profile;
                     }));
     }
 
