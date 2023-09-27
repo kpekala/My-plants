@@ -15,6 +15,10 @@ export class PlantModalComponent {
   @Output() closeModal = new EventEmitter();
   @Output() onItemRemovedFromCollection = new EventEmitter();
 
+  isLoading = false;
+  alertMessage = "";
+  showAlert = false;
+
   constructor(private profileService: ProfileService) {}
 
   onClose(){
@@ -22,26 +26,44 @@ export class PlantModalComponent {
   }
 
   onAddToCollection() {
+    this.isLoading = true;
     this.profileService.addSpeciesToCollection(this.plant.id)
       .subscribe({
         next: () => {
-          
+          this.openAlert("Succesfully added item to your collection!");
+          this.isLoading = false;
         },
         error: () => {
-          alert('Error adding species to collection!');
+          this.isLoading = false;
+          this.openAlert('Error adding species to collection!');
         }
       });
   }
 
   onRemoveFromCollection() {
+    this.isLoading = true;
     this.profileService.removeSpeciesFromCollection(this.plant.id)
       .subscribe({
         next: () => {
           this.onItemRemovedFromCollection.emit();
+          this.isLoading = false;
+          this.openAlert('Succesfully removed item from your collection!');
         },
         error: () => {
-          alert('Error removing species to collection!');
+          this.isLoading = false;
+          this.openAlert('Error removing item from collection!');
         }
       });
+  }
+
+  onAlertClose() {
+    this.showAlert = false;
+    this.alertMessage = '';
+    this.closeModal.emit();
+  }
+
+  openAlert(message) {
+    this.alertMessage = message;
+    this.showAlert = true;
   }
 }

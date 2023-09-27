@@ -1,4 +1,5 @@
 <div class="plant-modal-container">
+  <app-alert *ngIf="showAlert" [message]="alertMessage" (close)="onAlertClose()"></app-alert>
   <div class="card plant-modal-card">
       <img [src]="plant.imageUrl" class="card-img-top" alt="...">
       <div class="card-body">
@@ -13,16 +14,17 @@
         <button 
           class="btn btn-secondary" 
           (click)="onClose()">Close</button>
-          <button 
-            *ngIf="!isCollectionItem"
-            class="btn btn-primary" 
-            style="margin-right: 1rem;"
-            (click)="onAddToCollection()">Add to collection</button>
-            <button 
-            *ngIf="isCollectionItem"
-            class="btn btn-danger" 
-            style="margin-right: 1rem;"
-            (click)="onRemoveFromCollection()">Remove from collection</button>
+        <button 
+          *ngIf="!isCollectionItem"
+          class="btn btn-primary" 
+          style="margin-right: 1rem;"
+          (click)="onAddToCollection()">Add to collection</button>
+        <button 
+          *ngIf="isCollectionItem"
+          class="btn btn-danger" 
+          style="margin-right: 1rem;"
+          (click)="onRemoveFromCollection()">Remove from collection</button>
+        <app-spinner *ngIf="isLoading" style="float: right; margin-right: 3rem;"></app-spinner>
       </div>
   </div>
 </div>
