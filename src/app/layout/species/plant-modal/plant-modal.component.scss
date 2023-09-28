@@ -17,6 +17,11 @@
     z-index: 100;
 }
 
+.plant-description {
+    max-height: 6rem;
+    overflow-y: auto;
+}
+
 .btn{
     float: right;
 }

@@ -58,8 +58,11 @@ export class SpeciesComponent implements OnInit{
   showItem(id: number): boolean {
     if(this.isCollection && !this.profile) 
       return false;
-    if(!this.isCollection || !this.profile)
-      return true;
+    if(!this.isCollection) {
+      if(!this.profile)
+        return false;
+      return !this.profile.collection.includes(id);
+    }
     return this.profile.collection.includes(id);
   }
 
