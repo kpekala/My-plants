@@ -5,6 +5,7 @@ import { Observable, map, switchMap, tap } from "rxjs";
 import { getStorage, ref } from "firebase/storage";
 import { LocalStorageService } from "src/app/data/local-storage.service";
 import { AuthService } from "src/app/auth/auth.service";
+import { SpeciesService } from "../../species/species.service";
 
 @Injectable({providedIn: 'root'})
 export class ProfileService{ 
@@ -13,7 +14,8 @@ export class ProfileService{
 
     constructor(private http: HttpClient, 
                 private localStorageService: LocalStorageService,
-                private authService: AuthService){
+                private authService: AuthService,
+                private speciesService: SpeciesService){
 
     }
 
@@ -49,7 +51,8 @@ export class ProfileService{
                 profile.collection = collection;
                 return profile;
             }),
-            switchMap((profile: Profile) => this.updateProfile(profile)));
+            switchMap((profile: Profile) => this.updateProfile(profile)),
+            switchMap(() => this.speciesService.changeSpeciesPopularity(speciesId, 1)));
     }
 
     removeSpeciesFromCollection(speciesId: number) {
@@ -63,6 +66,7 @@ export class ProfileService{
                 profile.collection = collection;
                 return profile;
             }),
-            switchMap((profile: Profile) => this.updateProfile(profile)));
+            switchMap((profile: Profile) => this.updateProfile(profile)),
+            switchMap(() => this.speciesService.changeSpeciesPopularity(speciesId, -1)));
     }
 }

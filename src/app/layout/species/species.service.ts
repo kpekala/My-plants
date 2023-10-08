@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Species} from "./species.model";
-import { Observable, Subject, map } from "rxjs";
+import { Observable, Subject, map, switchMap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -21,5 +21,19 @@ export class SpeciesService{
                 }
                 return species;
             }));
+    }
+
+    updateSpecies(species: Species[]): Observable<any> {
+        return this.http.put(this.speciesUrl, species);
+    }
+
+    changeSpeciesPopularity(speciesId: number, popularityChange: number): Observable<any>{ 
+        let fetchPlantsSub = this.fetchPlants();
+        return fetchPlantsSub.pipe(
+            switchMap((species: Species[]) => {
+                species[speciesId].ownersCount += popularityChange;
+                return this.updateSpecies(species);
+            })
+        )
     }
 }
