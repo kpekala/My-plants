@@ -13,7 +13,7 @@ export class PlantModalComponent {
   @Input() plant!: Species;
   @Input() isCollectionItem: boolean;
   @Output() closeModal = new EventEmitter();
-  @Output() onItemRemovedFromCollection = new EventEmitter();
+  @Output() onItemsChanged = new EventEmitter();
 
   isLoading = false;
   alertMessage = "";
@@ -31,6 +31,7 @@ export class PlantModalComponent {
       .subscribe({
         next: () => {
           this.openAlert("Succesfully added item to your collection!");
+          this.onItemsChanged.emit();
           this.isLoading = false;
         },
         error: () => {
@@ -45,7 +46,7 @@ export class PlantModalComponent {
     this.profileService.removeSpeciesFromCollection(this.plant.id)
       .subscribe({
         next: () => {
-          this.onItemRemovedFromCollection.emit();
+          this.onItemsChanged.emit();
           this.isLoading = false;
           this.openAlert('Succesfully removed item from your collection!');
         },

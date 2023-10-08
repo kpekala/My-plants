@@ -12,6 +12,6 @@
         [plant]="selectedSpecies"
         [isCollectionItem]="isCollection"
         (closeModal)="onCloseDetails()"
-        (onItemRemovedFromCollection)="onItemRemovedFromCollection()">
+        (onItemsChanged)="reloadSpecies()">
     </app-plant-modal>
 </div>
