@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Species} from "./species.model";
+import {NewSpecies, Species} from "./species.model";
 import { Observable, Subject, map, switchMap } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
@@ -35,5 +35,14 @@ export class SpeciesService{
                 return this.updateSpecies(species);
             })
         )
+    }
+
+    addSpecies(plant: NewSpecies) {
+        return this.fetchPlants().pipe(
+            switchMap((species: Species[]) => {
+                species.push(plant.mapToSpecies());
+                return this.updateSpecies(species);
+            }
+        ))
     }
 }

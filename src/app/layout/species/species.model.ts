@@ -19,4 +19,9 @@ export class NewSpecies {
         public description = '',
         public link = ''
     ){}
+
+    mapToSpecies(){
+        return new Species(this.name,this.imageUrl, 0, this.family, 
+                this.description, this.link, -1);
+    }
 }

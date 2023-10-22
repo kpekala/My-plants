@@ -16,3 +16,10 @@
     width: 32rem;
     z-index: 100;
 }
+
+img {
+    margin-top: 1rem;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
