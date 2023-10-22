@@ -10,3 +10,13 @@ export class Species {
         public id: number) {
     }
 }
+
+export class NewSpecies { 
+    constructor(
+        public name = '',
+        public imageUrl = '',
+        public family = '',
+        public description = '',
+        public link = ''
+    ){}
+}

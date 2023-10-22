@@ -5,3 +5,18 @@
     gap: 1rem;
     justify-content: center;
 }
+
+.add-plant-btn-container {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+}
+
+.add-plant-btn {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

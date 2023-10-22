@@ -14,4 +14,14 @@
         (closeModal)="onCloseDetails()"
         (onItemsChanged)="reloadSpecies()">
     </app-plant-modal>
+    <app-add-plant *ngIf="addingPlant" (close)="onCloseAddPlantView()">
+
+    </app-add-plant>
+    <div class="add-plant-btn-container">
+        <button class="btn btn-primary add-plant-btn" (click)="onAddPlantClick()">
+            <span class="material-symbols-outlined">
+                add
+            </span>
+        </button>
+    </div>
 </div>

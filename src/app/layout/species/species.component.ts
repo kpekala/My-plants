@@ -18,6 +18,7 @@ export class SpeciesComponent implements OnInit{
   species: Species[] = [];
   speciesDetailsSub: Subscription;
   showModal = false;
+  addingPlant = false;
   selectedSpecies = null;
 
   profile: Profile = null;
@@ -68,5 +69,13 @@ export class SpeciesComponent implements OnInit{
 
   onItemRemovedFromCollection() {
     this.reloadSpecies();
+  }
+
+  onAddPlantClick() {
+    this.addingPlant = true;
+  }
+
+  onCloseAddPlantView() {
+    this.addingPlant = false;
   }
 }

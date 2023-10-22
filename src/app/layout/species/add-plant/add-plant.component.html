@@ -1,0 +1,20 @@
+<div class="plant-modal-container">
+  <div class="card plant-modal-card">
+    <div class="card plant-modal-card">
+      <img [src]="plant.imageUrl" class="card-img-top" alt="...">
+      <div class="card-body">
+        <label class="form-label">Plant name</label>
+        <input type="text" class="form-control" [(ngModel)]="plant.name">
+        <p class="card-text plant-description">{{plant.description}}</p>
+      </div>
+      <div class="card-body">
+        <a href="{{plant.link}}" class="card-link">Link to Wikipedia</a>
+        <button class="btn btn-secondary" (click)="onClose()">Close</button>
+        <button class="btn btn-primary" 
+          style="margin-right: 1rem;" 
+          (click)="onAdd()">Save</button>
+        <app-spinner *ngIf="isSaving" style="float: right; margin-right: 3rem;"></app-spinner>
+      </div>
+    </div>
+  </div>
+</div>

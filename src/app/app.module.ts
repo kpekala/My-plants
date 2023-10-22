@@ -16,6 +16,7 @@ import { PlantModalComponent } from './layout/species/plant-modal/plant-modal.co
 import { ProfileComponent } from './layout/home/profile/profile.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AlertComponent } from './shared/alert/alert.component';
+import { AddPlantComponent } from './layout/species/add-plant/add-plant.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AlertComponent } from './shared/alert/alert.component';
     PlantModalComponent,
     ProfileComponent,
     SpinnerComponent,
-    AlertComponent
+    AlertComponent,
+    AddPlantComponent
   ],
   imports: [
     BrowserModule,
