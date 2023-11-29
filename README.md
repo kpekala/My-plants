@@ -1,5 +1,14 @@
 # MyPlants
 
+## About
+
+My first angular app 😄. Very basic app in which user can add plants to his/her collection. In app you are able to :
+ - add and remove plants from your collection
+ - add new plants 
+ - see a popularity of an plant in the app
+
+## Images
+
 ![alt text](./screens/species.png)
 ![alt text](./screens/strawberry.png)
 
