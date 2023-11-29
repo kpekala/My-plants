@@ -1,10 +1,13 @@
 # MyPlants
 
+![alt text](./screens/species.png)
+![alt text](./screens/strawberry.png)
+
 ## Main features to be developed
 - Viewing all species ✅
 - Viewing your collection of plants ✅
 - Adding plants to your collection ✅
-- Adding plant species
+- Adding plant species✅
 - Searching through database of species
 
 ## Tech stack
