@@ -9,8 +9,8 @@ My first angular app 😄. Very basic app in which user can add plants to his/he
 
 ## Images
 
-![alt text](./screens/species.png)
-![alt text](./screens/strawberry.png)
+![alt text](./screens/species.jpg)
+![alt text](./screens/strawberry.jpg)
 
 ## Main features to be developed
 - Viewing all species ✅
