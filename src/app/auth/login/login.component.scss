@@ -1,14 +1,10 @@
 @import "../auth.component.scss";
 
 .login-form-container {
-    width: 30rem;
-    margin-top: -5rem;
+  width: 30rem;
+  margin-top: -5rem;
 
-    @media (max-width: 1000px) {
-        width: 80%;
-    }
-
-    @media (max-width: 800px) {
-        width: 100%;
-    }
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 }
