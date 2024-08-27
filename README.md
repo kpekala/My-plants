@@ -27,7 +27,8 @@ My first angular app 😄. Very basic app in which user can add plants to his/he
 - Sass
 - Coffee
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.4. 
+[EDIT: Angular updated to version 17!]
 
 ## Development server
 
