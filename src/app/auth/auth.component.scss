@@ -1,24 +1,19 @@
-@import './../../scss/variables.scss';
-@import 'styles';
+@import "./../../scss/variables.scss";
+@import "styles";
 
-.auth-container{
-    background-color: $secondary;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.auth-container {
+  background-color: $secondary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.login-form-container{
-    width: 30rem;
-  margin-top: -5rem;
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.button-container{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.app-title{
-    color: $primary;
+.app-title {
+  color: $primary;
 }
