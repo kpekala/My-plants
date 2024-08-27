@@ -1,27 +1,32 @@
-import {Injectable} from "@angular/core";
-import {Observable, of} from "rxjs";
-import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth";
-import {LocalStorageService} from "../data/local-storage.service";
-import {Router} from "@angular/router";
-import {FirebaseService} from "../data/firebase.service";
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { LocalStorageService } from '../data/local-storage.service';
+import { Router } from '@angular/router';
+import { FirebaseService } from '../data/firebase.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private USER_LOGGED_IN_KEY = 'USER_LOGGED_IN_KEY';
 
-  private USER_LOGGED_IN_KEY = "USER_LOGGED_IN_KEY";
-
-  constructor(private localStorageService: LocalStorageService, 
-    private router: Router, 
-    private firebaseService: FirebaseService) {
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router,
+    private firebaseService: FirebaseService
+  ) {
     this.registerUserStateChangeListener();
     console.log(firebaseService.app);
   }
 
   isLoggedIn(): Observable<boolean> {
-    return new Observable(subscriber => {
-      getAuth().onAuthStateChanged(user => {
+    return new Observable((subscriber) => {
+      getAuth().onAuthStateChanged((user) => {
         subscriber.next(user != null);
       });
     });
@@ -29,28 +34,39 @@ export class AuthService {
 
   login(email: string, password: string) {
     const auth = getAuth();
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+    return signInWithEmailAndPassword(auth, email, password).then(
+      (userCredential) => {
         const user = userCredential.user;
         console.log(`User ${user} is logged in`);
-      });
+      }
+    );
   }
 
   register(email: string, password: string) {
     const auth = getAuth();
-    return createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+    return createUserWithEmailAndPassword(auth, email, password).then(
+      (userCredential) => {
         const user = userCredential.user;
         console.log(`User ${user} is created`);
-      });
+      }
+    );
   }
 
   signOut() {
-    getAuth().signOut().then(() => {
-      console.log('Signed Out');
-    }, (error) => {
-      console.error('Sign Out Error', error);
-    });
+    getAuth()
+      .signOut()
+      .then(
+        () => {
+          console.log('Signed Out');
+        },
+        (error) => {
+          console.error('Sign Out Error', error);
+        }
+      );
+  }
+
+  removeAccount() {
+    return getAuth().currentUser.delete();
   }
 
   private registerUserStateChangeListener() {
@@ -64,7 +80,7 @@ export class AuthService {
     });
   }
 
-  getUserId(){
+  getUserId() {
     return getAuth().currentUser.uid;
   }
 }

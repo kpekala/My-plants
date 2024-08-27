@@ -1,10 +1,23 @@
-@import 'styles';
+@import "styles";
 
-.custom-nav{
-    background-color: $primary;
+.custom-nav {
+  background-color: $primary;
 }
 
-.icon-button{
+.icon-button {
   color: white;
   cursor: pointer;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding-left: 0.7rem;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+.red {
+  color: red;
 }

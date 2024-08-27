@@ -1,27 +1,46 @@
 <nav class="navbar navbar-dark navbar-expand custom-nav">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">My plants</a>
-    <ul class="navbar-nav" style="width: 100%;">
+    <ul class="navbar-nav" style="width: 100%">
       <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/app/home" class="nav-link" routerLinkActive="active">Home</a>
+        <a routerLink="/app/home" class="nav-link" routerLinkActive="active"
+          >Home</a
+        >
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/app/find" class="nav-link" routerLinkActive="active">Find</a>
+        <a routerLink="/app/find" class="nav-link" routerLinkActive="active"
+          >Find</a
+        >
       </li>
     </ul>
-    <span style="margin-left: auto; margin-right: 1rem;">
+    <span style="margin-left: auto; margin-right: 1rem">
       <div class="dropdown">
-        <i class="material-icons icon-button" role="button"
-          id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <i
+          class="material-icons icon-button"
+          role="button"
+          id="dropdownMenuLink"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
           more_vert
         </i>
-        <ul class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="dropdownMenuButton1">
-          <li (click)="onSignOutClick()" style="cursor: pointer; padding-left: 0.7rem;">
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="dropdownMenuButton1"
+        >
+          <li (click)="onSignOutClick()" class="dropdown-item menu-item">
             Sign out
           </li>
+          <li class="dropdown-item menu-item">
+            <a href="./../../../assets/privacy-policy.txt" class="link"
+              >Privacy Policy</a
+            >
+          </li>
+          <li (click)="onRemoveAccount()" class="dropdown-item menu-item red">
+            Remove account
+          </li>
         </ul>
-       </div>
+      </div>
     </span>
   </div>
 </nav>
