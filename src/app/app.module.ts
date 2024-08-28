@@ -17,6 +17,11 @@ import { ProfileComponent } from './layout/home/profile/profile.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { AddPlantComponent } from './layout/species/add-plant/add-plant.component';
+import {
+  NgcCookieConsentModule,
+  provideNgcCookieConsent,
+} from 'ngx-cookieconsent';
+import { cookieConfig } from './config/cookie-consent';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,7 @@ import { AddPlantComponent } from './layout/species/add-plant/add-plant.componen
     FormsModule,
     ReactiveFormsModule,
     NavigationComponent,
+    NgcCookieConsentModule.forRoot(cookieConfig),
   ],
   providers: [],
   bootstrap: [AppComponent],

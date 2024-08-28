@@ -21,7 +21,6 @@ export class AuthService {
     private firebaseService: FirebaseService
   ) {
     this.registerUserStateChangeListener();
-    console.log(firebaseService.app);
   }
 
   isLoggedIn(): Observable<boolean> {
@@ -37,7 +36,6 @@ export class AuthService {
     return signInWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
         const user = userCredential.user;
-        console.log(`User ${user} is logged in`);
       }
     );
   }
@@ -47,7 +45,6 @@ export class AuthService {
     return createUserWithEmailAndPassword(auth, email, password).then(
       (userCredential) => {
         const user = userCredential.user;
-        console.log(`User ${user} is created`);
       }
     );
   }

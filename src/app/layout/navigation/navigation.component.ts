@@ -6,6 +6,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthService } from '../../auth/auth.service';
 import { ProfileService } from '../home/profile/profile.service';
 import { SearchStoreService } from './search.store.service';
+import { ShowCookieStoreService } from 'src/app/config/show-cookie.store.service';
 
 @Component({
   selector: 'app-navigation',
@@ -20,7 +21,8 @@ export class NavigationComponent implements OnInit {
     private readonly router: Router,
     private readonly profileService: ProfileService,
     private readonly searchStoreService: SearchStoreService,
-    private readonly destroyRef: DestroyRef
+    private readonly destroyRef: DestroyRef,
+    private readonly showCookieStoreService: ShowCookieStoreService
   ) {}
 
   search = new FormControl('');
@@ -51,5 +53,9 @@ export class NavigationComponent implements OnInit {
         });
       });
     }
+  }
+
+  onShowCookieBanner() {
+    this.showCookieStoreService.setShow();
   }
 }
