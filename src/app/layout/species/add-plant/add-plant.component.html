@@ -4,23 +4,60 @@
       <form [formGroup]="speciesForm" (ngSubmit)="onSave()">
         <div class="card-body">
           <label class="form-label">Plant name</label>
-          <input formControlName="name" type="text" class="form-control" [(ngModel)]="plant.name">
-          <label class="form-label">Family name</label>
-          <input formControlName="family" type="text" class="form-control" [(ngModel)]="plant.family">
-          <label class="form-label">Plant description</label>
-          <textarea formControlName="description" class="form-control" rows="3" [(ngModel)]="plant.description"></textarea>
-          <label class="form-label">Link to wikipedia</label>
-          <input formControlName="link" type="text" class="form-control" [(ngModel)]="plant.link">
-          <label class="form-label">Link to image</label>
-          <input formControlName="imageUrl" type="text" class="form-control" [(ngModel)]="plant.imageUrl">
-          <img [src]="plant.imageUrl" *ngIf="plant.imageUrl !== ''" alt="...">
+          <input
+            formControlName="name"
+            type="text"
+            class="form-control"
+            [(ngModel)]="plant.name"
+          />
+
+          <label class="form-label mt-2">Family name</label>
+          <input
+            formControlName="family"
+            type="text"
+            class="form-control"
+            [(ngModel)]="plant.family"
+          />
+
+          <label class="form-label mt-2">Plant description</label>
+          <textarea
+            formControlName="description"
+            class="form-control"
+            rows="3"
+            [(ngModel)]="plant.description"
+          ></textarea>
+
+          <label class="form-label mt-2">Link to wikipedia</label>
+          <input
+            formControlName="link"
+            type="text"
+            class="form-control"
+            [(ngModel)]="plant.link"
+          />
+
+          <label class="form-label mt-2">Link to image</label>
+          <input
+            formControlName="imageUrl"
+            type="text"
+            class="form-control"
+            [(ngModel)]="plant.imageUrl"
+          />
+          <img [src]="plant.imageUrl" *ngIf="plant.imageUrl !== ''" alt="..." />
         </div>
         <div class="card-body">
           <button class="btn btn-secondary" (click)="onClose()">Close</button>
-          <button class="btn btn-primary" 
-            style="float: right;" 
-            type="submit" [disabled]="speciesForm.invalid">Save</button>
-          <app-spinner *ngIf="isSaving" style="float: right; margin-right: 3rem;"></app-spinner>
+          <button
+            class="btn btn-primary"
+            style="float: right"
+            type="submit"
+            [disabled]="speciesForm.invalid"
+          >
+            Save
+          </button>
+          <app-spinner
+            *ngIf="isSaving"
+            style="float: right; margin-right: 3rem"
+          ></app-spinner>
         </div>
       </form>
     </div>
