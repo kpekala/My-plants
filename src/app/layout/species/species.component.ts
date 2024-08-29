@@ -6,6 +6,8 @@ import { SearchStoreService } from '../navigation/search.store.service';
 import { Species } from './species.model';
 import { SpeciesService } from './species.service';
 import { ToggleFavEvent } from './plant/plant.component';
+import { ProfileStoreService } from '../home/profile/profile.store.service';
+import { PlantsStoreService } from './plants.store.service';
 
 @Component({
     selector: 'app-find-plants',
@@ -17,18 +19,17 @@ export class SpeciesComponent implements OnInit {
 
     search = signal('');
 
-    species: Species[] = [];
     speciesDetailsSub: Subscription;
     showModal = false;
     addingPlant = false;
     selectedSpecies = null;
 
-    profile: Profile = null;
-
     constructor(
-        private speciesService: SpeciesService,
-        private profileService: ProfileService,
-        private searchStoreService: SearchStoreService
+        private readonly speciesService: SpeciesService,
+        private readonly profileService: ProfileService,
+        private readonly searchStoreService: SearchStoreService,
+        readonly profileStoreService: ProfileStoreService,
+        readonly plantsStoreService: PlantsStoreService
     ) {}
 
     ngOnInit(): void {
@@ -41,21 +42,16 @@ export class SpeciesComponent implements OnInit {
     }
 
     reloadSpecies() {
-        this.speciesService
-            .fetchPlants()
-            .pipe(
-                tap((species: Species[]) => {
-                    this.species = species;
-                }),
-                switchMap(() => {
-                    return this.profileService.getProfile();
-                })
-            )
-            .subscribe({
-                next: (profile: Profile) => {
-                    this.profile = profile;
-                },
-            });
+        this.speciesService.fetchPlants().subscribe({
+            next: (plants: Species[]) => {
+                this.plantsStoreService.setPlants(plants);
+            },
+        });
+        this.profileService.getProfile().subscribe({
+            next: (profile: Profile) => {
+                this.profileStoreService.setProfile(profile);
+            },
+        });
     }
 
     onShowDetails(species: Species) {
@@ -69,21 +65,24 @@ export class SpeciesComponent implements OnInit {
     }
 
     showItem(id: number): boolean {
-        if (this.isCollection() && !this.profile) return false;
+        const profile = this.profileStoreService.profile();
+        const plants = this.plantsStoreService.state();
+
+        if (this.isCollection() && !profile) return false;
         if (!this.isCollection()) {
-            if (!this.profile) return false;
+            if (!profile) return false;
             return (
-                !this.profile.favorites.includes(id) &&
+                !profile.favorites.includes(id) &&
                 (this.search() === '' ||
-                    this.species[id].speciesName
+                    plants[id].speciesName
                         .toLowerCase()
                         .includes(this.search().toLowerCase()))
             );
         }
         return (
-            this.profile.favorites.includes(id) &&
+            profile.favorites.includes(id) &&
             (this.search() === '' ||
-                this.species[id].speciesName
+                plants[id].speciesName
                     .toLowerCase()
                     .includes(this.search().toLowerCase()))
         );
