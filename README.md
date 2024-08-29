@@ -15,9 +15,12 @@ My first angular app 😄. Very basic app in which user can add plants to his/he
 ## Main features to be developed
 - Viewing all species ✅
 - Viewing your collection of plants ✅
-- Adding plants to your collection ✅
+- Adding plants to favorites ✅
 - Adding plant species✅
-- Searching through database of species
+- Searching through database of species ✅
+- Changing collection size of specific plant ✅
+- List of plants you own
+- Watering the plants
 
 ## Tech stack
 - Angular
