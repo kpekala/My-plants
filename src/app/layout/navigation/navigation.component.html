@@ -1,58 +1,83 @@
 <nav class="navbar navbar-dark navbar-expand custom-nav fixed-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">My plants</a>
-    <ul class="navbar-nav" style="width: 100%">
-      <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/app/home" class="nav-link" routerLinkActive="active"
-          >Home</a
-        >
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a routerLink="/app/find" class="nav-link" routerLinkActive="active"
-          >Find</a
-        >
-      </li>
-    </ul>
-    <span class="right">
-      <form class="d-flex me-3" role="search">
-        <input
-          class="form-control search-input"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          [formControl]="search"
-        />
-      </form>
-      <div class="dropdown" style="display: flex; align-items: center">
-        <i
-          class="material-icons icon-button"
-          role="button"
-          id="dropdownMenuLink"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          more_vert
-        </i>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="dropdownMenuButton1"
-        >
-          <li (click)="onSignOutClick()" class="dropdown-item menu-item">
-            Sign out
-          </li>
-          <li class="dropdown-item menu-item">
-            <a href="./../../../assets/privacy-policy.txt" class="link"
-              >Privacy Policy</a
-            >
-          </li>
-          <li (click)="onShowCookieBanner()" class="dropdown-item menu-item">
-            Show Cookie Consent Banner
-          </li>
-          <li (click)="onRemoveAccount()" class="dropdown-item menu-item red">
-            Remove account
-          </li>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">My plants</a>
+        <ul class="navbar-nav" style="width: 100%">
+            <li class="nav-item" routerLinkActive="active">
+                <a
+                    routerLink="/app/home"
+                    class="nav-link"
+                    routerLinkActive="active"
+                    >Profile</a
+                >
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a
+                    routerLink="/app/find"
+                    class="nav-link"
+                    routerLinkActive="active"
+                    >Find</a
+                >
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a
+                    routerLink="/app/garden"
+                    class="nav-link"
+                    routerLinkActive="active"
+                    >Garden</a
+                >
+            </li>
         </ul>
-      </div>
-    </span>
-  </div>
+        <span class="right">
+            <form class="d-flex me-3" role="search">
+                <input
+                    class="form-control search-input"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    [formControl]="search"
+                />
+            </form>
+            <div class="dropdown" style="display: flex; align-items: center">
+                <i
+                    class="material-icons icon-button"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                >
+                    more_vert
+                </i>
+                <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="dropdownMenuButton1"
+                >
+                    <li
+                        (click)="onSignOutClick()"
+                        class="dropdown-item menu-item"
+                    >
+                        Sign out
+                    </li>
+                    <li class="dropdown-item menu-item">
+                        <a
+                            href="./../../../assets/privacy-policy.txt"
+                            class="link"
+                            >Privacy Policy</a
+                        >
+                    </li>
+                    <li
+                        (click)="onShowCookieBanner()"
+                        class="dropdown-item menu-item"
+                    >
+                        Show Cookie Consent Banner
+                    </li>
+                    <li
+                        (click)="onRemoveAccount()"
+                        class="dropdown-item menu-item red"
+                    >
+                        Remove account
+                    </li>
+                </ul>
+            </div>
+        </span>
+    </div>
 </nav>
