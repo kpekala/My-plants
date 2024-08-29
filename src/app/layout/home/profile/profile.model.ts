@@ -4,7 +4,8 @@ export class Profile {
         public username: string,
         public imagePath: string,
         public favorites: number[],
-        public collection: CollectionItem[]
+        public collection: CollectionItem[],
+        public collectionMap = {}
     ) {}
 }
 

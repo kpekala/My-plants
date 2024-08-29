@@ -6,6 +6,7 @@ import { getStorage, ref } from 'firebase/storage';
 import { LocalStorageService } from 'src/app/data/local-storage.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SpeciesService } from '../../species/species.service';
+import { ProfileStoreService } from './profile.store.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -16,7 +17,8 @@ export class ProfileService {
         private http: HttpClient,
         private localStorageService: LocalStorageService,
         private authService: AuthService,
-        private speciesService: SpeciesService
+        private speciesService: SpeciesService,
+        private profileStoreService: ProfileStoreService
     ) {}
 
     createProfile(
@@ -44,7 +46,6 @@ export class ProfileService {
             map((profile: Profile) => {
                 if (!profile.favorites) profile.favorites = [];
                 if (!profile.collection) profile.collection = [];
-                this.parseCollection(profile);
                 return profile;
             })
         );
@@ -52,7 +53,13 @@ export class ProfileService {
 
     updateProfile(profile: Profile) {
         const userId = this.authService.getUserId();
-        return this.http.patch(`${this.profileUrl}/${userId}.json`, profile);
+        return this.http
+            .patch(`${this.profileUrl}/${userId}.json`, profile)
+            .pipe(
+                tap(() => {
+                    this.profileStoreService.setProfile(profile);
+                })
+            );
     }
 
     addPlantToFavorites(speciesId: number) {
@@ -88,17 +95,19 @@ export class ProfileService {
         );
     }
 
-    private parseCollection(profile) {
-        profile.collectionMap = {};
+    public parseCollection(profile: Profile) {
+        const collectionMap = {};
+        console.log(profile);
         profile.collection.forEach((item) => {
-            if (item && item.id) {
+            if (item && item.id !== undefined) {
                 const idString = `${item.id}`;
-                if (!profile.collectionMap[idString]) {
-                    profile.collectionMap[idString] = 1;
+                if (!collectionMap[idString]) {
+                    collectionMap[idString] = 1;
                 } else {
-                    profile.collectionMap[idString] += 1;
+                    collectionMap[idString] += 1;
                 }
             }
         });
+        return collectionMap;
     }
 }

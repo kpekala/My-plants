@@ -18,6 +18,7 @@ export class SpeciesComponent implements OnInit {
     isCollection = input(false);
 
     search = signal('');
+    collectionMap = signal({});
 
     speciesDetailsSub: Subscription;
     showModal = false;
@@ -50,6 +51,9 @@ export class SpeciesComponent implements OnInit {
         this.profileService.getProfile().subscribe({
             next: (profile: Profile) => {
                 this.profileStoreService.setProfile(profile);
+                this.collectionMap.set(
+                    this.profileService.parseCollection(profile)
+                );
             },
         });
     }
@@ -112,6 +116,28 @@ export class SpeciesComponent implements OnInit {
             this.profileService.removePlantFromFavorites(plantId).subscribe({
                 next: () => {
                     this.reloadSpecies();
+                },
+            });
+        }
+    }
+
+    collectionSize(selectedPlant: Species) {
+        return this.collectionMap()[selectedPlant.id] ?? 0;
+    }
+
+    onChangeCollectionSize(newSize: number) {
+        const profile: Profile = this.profileStoreService.profile();
+        const id = this.selectedSpecies.id ?? -1;
+        const oldSize = this.collectionMap()[id] ?? 0;
+        const size = newSize - oldSize;
+        console.log(size);
+        if (size > 0) {
+            profile.collection.push(...Array(size).fill({ id }));
+            this.profileService.updateProfile(profile).subscribe({
+                next: () => {
+                    this.collectionMap.set(
+                        this.profileService.parseCollection(profile)
+                    );
                 },
             });
         }
