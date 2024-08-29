@@ -73,7 +73,7 @@ export class SpeciesComponent implements OnInit {
         if (!this.isCollection()) {
             if (!this.profile) return false;
             return (
-                !this.profile.collection.includes(id) &&
+                !this.profile.favorites.includes(id) &&
                 (this.search() === '' ||
                     this.species[id].speciesName
                         .toLowerCase()
@@ -81,7 +81,7 @@ export class SpeciesComponent implements OnInit {
             );
         }
         return (
-            this.profile.collection.includes(id) &&
+            this.profile.favorites.includes(id) &&
             (this.search() === '' ||
                 this.species[id].speciesName
                     .toLowerCase()
@@ -104,13 +104,13 @@ export class SpeciesComponent implements OnInit {
     onToggleFavorite(event: ToggleFavEvent) {
         const plantId = event.plant.id;
         if (event.toggle) {
-            this.profileService.addSpeciesToCollection(plantId).subscribe({
+            this.profileService.addPlantToFavorites(plantId).subscribe({
                 next: () => {
                     this.reloadSpecies();
                 },
             });
         } else {
-            this.profileService.removeSpeciesFromCollection(plantId).subscribe({
+            this.profileService.removePlantFromFavorites(plantId).subscribe({
                 next: () => {
                     this.reloadSpecies();
                 },

@@ -42,7 +42,7 @@ export class ProfileService {
         const userId = this.authService.getUserId();
         return this.http.get<any>(`${this.profileUrl}/${userId}.json`).pipe(
             map((profile: Profile) => {
-                if (!profile.collection) profile.collection = [];
+                if (!profile.favorites) profile.favorites = [];
                 return profile;
             })
         );
@@ -53,12 +53,12 @@ export class ProfileService {
         return this.http.patch(`${this.profileUrl}/${userId}.json`, profile);
     }
 
-    addSpeciesToCollection(speciesId: number) {
+    addPlantToFavorites(speciesId: number) {
         return this.getProfile().pipe(
             map((profile: Profile) => {
-                const collection = profile.collection ? profile.collection : [];
+                const collection = profile.favorites ? profile.favorites : [];
                 collection.push(speciesId);
-                profile.collection = collection;
+                profile.favorites = collection;
                 return profile;
             }),
             switchMap((profile: Profile) => this.updateProfile(profile)),
@@ -68,15 +68,15 @@ export class ProfileService {
         );
     }
 
-    removeSpeciesFromCollection(speciesId: number) {
+    removePlantFromFavorites(speciesId: number) {
         return this.getProfile().pipe(
             map((profile: Profile) => {
-                const collection = profile.collection ? profile.collection : [];
+                const collection = profile.favorites ? profile.favorites : [];
                 const index = collection.indexOf(speciesId);
                 if (index !== -1) {
                     collection.splice(index, 1);
                 }
-                profile.collection = collection;
+                profile.favorites = collection;
                 return profile;
             }),
             switchMap((profile: Profile) => this.updateProfile(profile)),
