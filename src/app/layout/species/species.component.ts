@@ -1,13 +1,13 @@
-import { Component, input, Input, OnInit, signal } from '@angular/core';
-import { Subscription, switchMap, tap } from 'rxjs';
+import { Component, input, OnInit, signal } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Profile } from '../home/profile/profile.model';
 import { ProfileService } from '../home/profile/profile.service';
+import { ProfileStoreService } from '../home/profile/profile.store.service';
 import { SearchStoreService } from '../navigation/search.store.service';
+import { ToggleFavEvent } from './plant/plant.component';
+import { PlantsStoreService } from './plants.store.service';
 import { Species } from './species.model';
 import { SpeciesService } from './species.service';
-import { ToggleFavEvent } from './plant/plant.component';
-import { ProfileStoreService } from '../home/profile/profile.store.service';
-import { PlantsStoreService } from './plants.store.service';
 
 @Component({
     selector: 'app-find-plants',

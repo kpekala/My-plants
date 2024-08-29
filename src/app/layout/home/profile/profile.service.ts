@@ -44,6 +44,7 @@ export class ProfileService {
             map((profile: Profile) => {
                 if (!profile.favorites) profile.favorites = [];
                 if (!profile.collection) profile.collection = [];
+                this.parseCollection(profile);
                 return profile;
             })
         );
@@ -85,5 +86,19 @@ export class ProfileService {
                 this.speciesService.changeSpeciesPopularity(speciesId, -1)
             )
         );
+    }
+
+    private parseCollection(profile) {
+        profile.collectionMap = {};
+        profile.collection.forEach((item) => {
+            if (item && item.id) {
+                const idString = `${item.id}`;
+                if (!profile.collectionMap[idString]) {
+                    profile.collectionMap[idString] = 1;
+                } else {
+                    profile.collectionMap[idString] += 1;
+                }
+            }
+        });
     }
 }
