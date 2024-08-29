@@ -6,10 +6,10 @@ export const cookieConfig: NgcCookieConsentConfig = {
   },
   palette: {
     popup: {
-      background: '#000',
+      background: '#14C38E',
     },
     button: {
-      background: '#f1d600',
+      background: '#E3FCBF',
     },
   },
   theme: 'edgeless',
