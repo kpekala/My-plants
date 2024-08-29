@@ -1,6 +1,24 @@
-@import 'styles';
-
+@import "styles";
+@import "./../../../../scss/variables.scss";
 img {
-  height: 16rem;
-  object-fit: cover;
+    height: 16rem;
+    object-fit: cover;
+}
+
+.icon-container {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: white;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon-style {
+    color: $primary;
 }

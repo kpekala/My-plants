@@ -1,21 +1,48 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, OnInit, output, signal } from '@angular/core';
 import { Species } from '../species.model';
-import { SpeciesService } from '../species.service';
+
+export interface ToggleFavEvent {
+    toggle: boolean;
+    plant: Species;
+}
 
 @Component({
-  selector: 'app-plant',
-  templateUrl: './plant.component.html',
-  styleUrls: ['./plant.component.scss']
+    selector: 'app-plant',
+    templateUrl: './plant.component.html',
+    styleUrls: ['./plant.component.scss'],
 })
-export class PlantComponent {
-  @Input() plant!: Species;
-  @Output() showDetails = new EventEmitter<Species>();
+export class PlantComponent implements OnInit {
+    plant = input<Species>();
+    isCollection = input<boolean>();
+    showDetails = output<Species>();
+    onToggleFavorite = output<ToggleFavEvent>();
 
-  constructor(private speciesService: SpeciesService){
+    isFavorite = signal(false);
+    isMouseOnFavorite = signal(false);
 
-  }
+    constructor() {}
 
-  onShowDetails(){
-    this.showDetails.emit(this.plant)
-  }
+    ngOnInit(): void {
+        this.isFavorite.set(this.isCollection());
+    }
+
+    onShowDetails() {
+        this.showDetails.emit(this.plant());
+    }
+
+    onToggleFav() {
+        this.isFavorite.update((isFav) => !isFav);
+        this.onToggleFavorite.emit({
+            toggle: this.isFavorite(),
+            plant: this.plant(),
+        });
+    }
+
+    onFavoriteMouseEnter() {
+        this.isMouseOnFavorite.set(true);
+    }
+
+    onFavoriteMouseExit() {
+        this.isMouseOnFavorite.set(false);
+    }
 }

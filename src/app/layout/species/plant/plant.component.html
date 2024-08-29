@@ -1,14 +1,30 @@
-<div class="card" style="width: 18rem;">
-    <img src="{{plant.imageUrl}}" class="card-img-top" alt="...">
+<div class="card" style="width: 18rem">
+    <span
+        class="icon-container"
+        (mouseenter)="onFavoriteMouseEnter()"
+        (mouseleave)="onFavoriteMouseExit()"
+        (click)="onToggleFav()"
+    >
+        @if(isMouseOnFavorite() || isCollection()) {
+        <i class="fa-solid fa-heart fa-lg icon-style"></i>
+        } @else {
+        <i class="fa-regular fa-heart fa-lg icon-style"></i>
+        }
+    </span>
+    <img src="{{ plant().imageUrl }}" class="card-img-top" alt="..." />
     <div class="card-body">
-        <h5 class="card-title">{{plant.speciesName}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Family: {{plant.family}}</h6>
+        <h5 class="card-title">{{ plant().speciesName }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            Family: {{ plant().family }}
+        </h6>
     </div>
     <div class="card-footer text-muted">
-         <span>
-            {{plant.ownersCount}} people own
-         </span>
-        <button class="btn btn-primary btn-sm btn-bd-primary" style="float: right" (click)="onShowDetails()">
+        <span> {{ plant().ownersCount }} people own </span>
+        <button
+            class="btn btn-primary btn-sm btn-bd-primary"
+            style="float: right"
+            (click)="onShowDetails()"
+        >
             Show details
         </button>
     </div>
