@@ -47,7 +47,7 @@ export class SpeciesComponent implements OnInit {
                 tap((species: Species[]) => {
                     this.species = species;
                 }),
-                switchMap((species: Species[]) => {
+                switchMap(() => {
                     return this.profileService.getProfile();
                 })
             )

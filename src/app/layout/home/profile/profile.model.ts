@@ -3,6 +3,11 @@ export class Profile {
         public email: string,
         public username: string,
         public imagePath: string,
-        public favorites: number[]
+        public favorites: number[],
+        public collection: CollectionItem[]
     ) {}
+}
+
+export interface CollectionItem {
+    id: number;
 }

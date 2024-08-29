@@ -1,30 +1,39 @@
 <div class="plant-modal-container">
-  <app-alert *ngIf="showAlert" [message]="alertMessage" (close)="onAlertClose()"></app-alert>
-  <div class="card plant-modal-card">
-      <img [src]="plant.imageUrl" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">{{plant.speciesName}}</h5>
-        <p class="card-text plant-description">{{plant.description}}</p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Popularity: {{plant.ownersCount}}</li>
-      </ul>
-      <div class="card-body">
-        <a href="{{plant.link}}" class="card-link">Link to Wikipedia</a>
-        <button 
-          class="btn btn-secondary" 
-          (click)="onClose()">Close</button>
-        <button 
-          *ngIf="!isCollectionItem"
-          class="btn btn-primary" 
-          style="margin-right: 1rem;"
-          (click)="onAddToCollection()">Add to collection</button>
-        <button 
-          *ngIf="isCollectionItem"
-          class="btn btn-danger" 
-          style="margin-right: 1rem;"
-          (click)="onRemoveFromCollection()">Remove from collection</button>
-        <app-spinner *ngIf="isLoading" style="float: right; margin-right: 3rem;"></app-spinner>
-      </div>
-  </div>
+    <app-alert *ngIf="showAlert" [message]="alertMessage"></app-alert>
+    <div class="card plant-modal-card">
+        <img [src]="plant.imageUrl" class="card-img-top" alt="..." />
+        <div class="card-body">
+            <h5 class="card-title">{{ plant.speciesName }}</h5>
+            <p class="card-text plant-description">{{ plant.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Popularity: {{ plant.ownersCount }}</li>
+        </ul>
+        <div
+            class="input-group mb-3"
+            style="padding-left: 1rem; padding-right: 1rem"
+        >
+            <input
+                type="number"
+                class="form-control"
+                placeholder="Size of your collection"
+                [(ngModel)]="collectionSize"
+            />
+            <button
+                class="btn btn-outline-secondary"
+                type="button"
+                id="button-add"
+            >
+                Apply
+            </button>
+        </div>
+        <div class="card-body">
+            <a href="{{ plant.link }}" class="card-link">Link to Wikipedia</a>
+            <button class="btn btn-secondary" (click)="onClose()">Close</button>
+            <app-spinner
+                *ngIf="isLoading"
+                style="float: right; margin-right: 3rem"
+            ></app-spinner>
+        </div>
+    </div>
 </div>

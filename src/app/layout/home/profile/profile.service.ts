@@ -24,7 +24,7 @@ export class ProfileService {
         username: string,
         email: string
     ): Observable<any> {
-        const newProfile = new Profile(email, username, '', []);
+        const newProfile = new Profile(email, username, '', [], []);
         return this.http
             .put(`${this.profileUrl}/${userId}.json`, newProfile)
             .pipe(
@@ -43,6 +43,7 @@ export class ProfileService {
         return this.http.get<any>(`${this.profileUrl}/${userId}.json`).pipe(
             map((profile: Profile) => {
                 if (!profile.favorites) profile.favorites = [];
+                if (!profile.collection) profile.collection = [];
                 return profile;
             })
         );
