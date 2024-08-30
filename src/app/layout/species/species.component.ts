@@ -5,7 +5,7 @@ import { ProfileService } from '../home/profile/profile.service';
 import { ProfileStoreService } from '../home/profile/profile.store.service';
 import { SearchStoreService } from '../navigation/search.store.service';
 import { ToggleFavEvent } from './plant/plant.component';
-import { PlantsStoreService } from './plants.store.service';
+import { SpeciesStoreService } from './species.store.service';
 import { Species } from './species.model';
 import { SpeciesService } from './species.service';
 
@@ -29,7 +29,7 @@ export class SpeciesComponent implements OnInit {
         private readonly profileService: ProfileService,
         private readonly searchStoreService: SearchStoreService,
         readonly profileStoreService: ProfileStoreService,
-        readonly plantsStoreService: PlantsStoreService
+        readonly plantsStoreService: SpeciesStoreService
     ) {}
 
     ngOnInit(): void {
@@ -114,20 +114,7 @@ export class SpeciesComponent implements OnInit {
     }
 
     onChangeCollectionSize(newSize: number) {
-        const profile: Profile = this.profileStoreService.profile();
         const id = this.selectedSpecies.id ?? -1;
-        const oldSize = this.profileStoreService.collectionMap()[id] ?? 0;
-        const size = newSize - oldSize;
-        console.log(size);
-        if (size > 0) {
-            profile.collection.push(...Array(size).fill({ id }));
-            this.profileService.updateProfile(profile).subscribe({
-                next: () => {
-                    this.profileStoreService.setCollectionMap(
-                        this.profileService.parseCollection(profile)
-                    );
-                },
-            });
-        }
+        this.profileService.changeCollectionSize(id, newSize).subscribe();
     }
 }

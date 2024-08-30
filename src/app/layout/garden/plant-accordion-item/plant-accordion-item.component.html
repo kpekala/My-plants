@@ -1,0 +1,12 @@
+<ul class="list-group list-group-flush">
+    @for (plant of plantsFromOneSpecies(); track $index ) {
+    <li class="list-group-item">
+        <span>
+            {{ plantName() }}
+            No.
+            {{ $index }}
+        </span>
+        <span> </span>
+    </li>
+    }
+</ul>

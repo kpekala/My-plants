@@ -2,28 +2,26 @@
     <div class="row justify-center">
         <div class="col-lg-10">
             <div ngbAccordion class="mt-3">
-                @for (species of speciesList; track species.id) {
+                @for (gardenPlants of gardenPlantsStoreService.gardenPlants();
+                track gardenPlants.speciesId) {
                 <div ngbAccordionItem>
                     <h2 ngbAccordionHeader>
                         <button ngbAccordionButton>
-                            {{ findPlant(species.id).speciesName }}
+                            {{ gardenPlants.species.speciesName }}
                         </button>
                     </h2>
                     <div ngbAccordionCollapse>
                         <div ngbAccordionBody>
                             <ng-template>
-                                @if(species.arr) {
-                                <ul class="list-group list-group-flush">
-                                    @for (item of species.arr; track item.id ) {
-                                    <li class="list-group-item">
-                                        {{
-                                            findPlant(species.id).speciesName
-                                        }}
-                                        No.
-                                        {{ item.id }}
-                                    </li>
-                                    }
-                                </ul>
+                                @if(gardenPlants.specificPlants) {
+                                <app-plant-accordion-item
+                                    [plantsFromOneSpecies]="
+                                        gardenPlants.specificPlants
+                                    "
+                                    [plantName]="
+                                        gardenPlants.species.speciesName
+                                    "
+                                ></app-plant-accordion-item>
                                 }
                             </ng-template>
                         </div>

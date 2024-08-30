@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Profile } from './profile.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, switchMap, tap, toArray } from 'rxjs';
+import { Observable, map, of, switchMap, tap, toArray } from 'rxjs';
 import { getStorage, ref } from 'firebase/storage';
 import { LocalStorageService } from 'src/app/data/local-storage.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -99,6 +99,23 @@ export class ProfileService {
                 this.speciesService.changeSpeciesPopularity(speciesId, -1)
             )
         );
+    }
+
+    changeCollectionSize(plantId: number, newSize: number) {
+        const profile: Profile = this.profileStoreService.profile();
+        const oldSize = this.profileStoreService.collectionMap()[plantId] ?? 0;
+        const size = newSize - oldSize;
+        if (size > 0) {
+            profile.collection.push(...Array(size).fill({ id: plantId }));
+            return this.updateProfile(profile).pipe(
+                tap(() => {
+                    this.profileStoreService.setCollectionMap(
+                        this.parseCollection(profile)
+                    );
+                })
+            );
+        }
+        return of();
     }
 
     public parseCollection(profile: Profile) {

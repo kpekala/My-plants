@@ -3,7 +3,7 @@ import { Profile } from './profile.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileStoreService {
-    readonly profile = signal(null);
+    readonly profile = signal<Profile>(null);
     readonly collectionMap = signal<object>({});
 
     setProfile(profile: Profile) {

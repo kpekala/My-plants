@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NewSpecies, Species } from './species.model';
 import { Observable, Subject, map, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { PlantsStoreService } from './plants.store.service';
+import { SpeciesStoreService } from './species.store.service';
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +13,7 @@ export class SpeciesService {
 
     constructor(
         private http: HttpClient,
-        private plantsStoreService: PlantsStoreService
+        private speciesStoreService: SpeciesStoreService
     ) {}
 
     fetchPlants(): Observable<Species[]> {
@@ -26,7 +26,7 @@ export class SpeciesService {
                 return species;
             }),
             tap((species) => {
-                this.plantsStoreService.setPlants(species);
+                this.speciesStoreService.setSpecies(species);
             })
         );
     }
