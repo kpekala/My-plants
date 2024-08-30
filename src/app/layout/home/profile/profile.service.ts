@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Profile } from './profile.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, switchMap, tap } from 'rxjs';
+import { Observable, map, switchMap, tap, toArray } from 'rxjs';
 import { getStorage, ref } from 'firebase/storage';
 import { LocalStorageService } from 'src/app/data/local-storage.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -47,6 +47,12 @@ export class ProfileService {
                 if (!profile.favorites) profile.favorites = [];
                 if (!profile.collection) profile.collection = [];
                 return profile;
+            }),
+            tap((profile) => {
+                this.profileStoreService.setProfile(profile);
+                this.profileStoreService.setCollectionMap(
+                    this.parseCollection(profile)
+                );
             })
         );
     }

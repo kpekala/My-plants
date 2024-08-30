@@ -22,6 +22,7 @@ import {
   provideNgcCookieConsent,
 } from 'ngx-cookieconsent';
 import { cookieConfig } from './config/cookie-consent';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { cookieConfig } from './config/cookie-consent';
     ReactiveFormsModule,
     NavigationComponent,
     NgcCookieConsentModule.forRoot(cookieConfig),
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
