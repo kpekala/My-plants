@@ -2,18 +2,30 @@
     <div class="row justify-center">
         <div class="col-lg-10">
             <div ngbAccordion class="mt-3">
-                @for (item of items; track item.id) {
+                @for (species of speciesList; track species.id) {
                 <div ngbAccordionItem>
                     <h2 ngbAccordionHeader>
                         <button ngbAccordionButton>
-                            {{ findPlant(item.id).speciesName }}
+                            {{ findPlant(species.id).speciesName }}
                         </button>
                     </h2>
                     <div ngbAccordionCollapse>
                         <div ngbAccordionBody>
-                            <ng-template
-                                >Content for the first item</ng-template
-                            >
+                            <ng-template>
+                                @if(species.arr) {
+                                <ul class="list-group list-group-flush">
+                                    @for (item of species.arr; track item.id ) {
+                                    <li class="list-group-item">
+                                        {{
+                                            findPlant(species.id).speciesName
+                                        }}
+                                        No.
+                                        {{ item.id }}
+                                    </li>
+                                    }
+                                </ul>
+                                }
+                            </ng-template>
                         </div>
                     </div>
                 </div>

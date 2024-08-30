@@ -6,16 +6,17 @@ import { switchMap } from 'rxjs';
 import { PlantsStoreService } from '../species/plants.store.service';
 import { Species } from '../species/species.model';
 import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-garden',
     standalone: true,
-    imports: [NgbAccordionModule],
+    imports: [NgbAccordionModule, NgIf],
     templateUrl: './garden.component.html',
     styleUrl: './garden.component.scss',
 })
 export class GardenComponent implements OnInit {
-    items = [];
+    speciesList = [];
     plants = computed(() => this.plantsStoreService.state());
     profile = computed(() => this.profileStoreService.profile());
 
@@ -35,12 +36,16 @@ export class GardenComponent implements OnInit {
                     Object.entries(
                         this.profileStoreService.collectionMap()
                     ).forEach(([id, count]) => {
-                        console.log(id, count);
-                        this.items.push({
+                        this.speciesList.push({
                             id: Number(id),
-                            arr: Array(count).fill({}),
+                            arr: Array.from(Array(count), (_, index) => {
+                                return {
+                                    id: index + 1,
+                                };
+                            }),
                         });
                     });
+                    console.log(this.speciesList);
                 },
             });
     }
