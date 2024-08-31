@@ -28,7 +28,13 @@
                     <button ngbDropdownItem (click)="handleRenamePlant()">
                         Rename
                     </button>
-                    <button ngbDropdownItem style="color: red">Remove</button>
+                    <button
+                        ngbDropdownItem
+                        style="color: red"
+                        (click)="handleRemovePlant(plant.plantId)"
+                    >
+                        Remove
+                    </button>
                 </div>
             </div>
         </span>

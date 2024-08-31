@@ -49,4 +49,19 @@ export class GardenService {
             })
         );
     }
+
+    removePlant(plantId: number) {
+        const profile = this.profileStoreService.profile();
+        profile.collection = profile.collection.filter(
+            (plant) => plant.plantId !== plantId
+        );
+        return this.profileService.updateProfile(profile).pipe(
+            tap(() => {
+                this.gardenSpeciesStoreService.updateGardenSpecies(
+                    profile,
+                    this.profileStoreService.collectionMap()
+                );
+            })
+        );
+    }
 }

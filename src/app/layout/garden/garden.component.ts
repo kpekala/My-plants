@@ -44,4 +44,11 @@ export class GardenComponent implements OnInit {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe();
     }
+
+    handleRemovePlantClick(id: number) {
+        this.gardenService
+            .removePlant(id)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe();
+    }
 }
