@@ -6,6 +6,7 @@ import { ProfileService } from '../home/profile/profile.service';
 import { ProfileStoreService } from '../home/profile/profile.store.service';
 import { GardenPlantsStoreService } from './garden-plants.store.service';
 import { GardenSpecies } from './plant-accordion-item/garden.model';
+import { Profile } from '../home/profile/profile.model';
 
 @Injectable({ providedIn: 'root' })
 export class GardenService {
@@ -22,23 +23,10 @@ export class GardenService {
             .fetchPlants()
             .pipe(switchMap(() => this.profileService.getProfile()))
             .pipe(
-                tap(() => {
-                    const speciesList: GardenSpecies[] = [];
-                    Object.entries(
+                tap((profile: Profile) => {
+                    this.gardenSpeciesStoreService.updateGardenSpecies(
+                        profile,
                         this.profileStoreService.collectionMap()
-                    ).forEach(([id, count]) => {
-                        const idNumb = Number(id);
-                        const specificPlants = this.profileStoreService
-                            .profile()
-                            .collection.filter((plant) => plant.id === idNumb);
-                        speciesList.push({
-                            speciesId: idNumb,
-                            species: this.speciesStoreService.findById(idNumb),
-                            specificPlants,
-                        });
-                    });
-                    this.gardenSpeciesStoreService.setGardenSpecies(
-                        speciesList
                     );
                 })
             );
@@ -54,7 +42,10 @@ export class GardenService {
         });
         return this.profileService.updateProfile(profile).pipe(
             tap(() => {
-                this.profileStoreService.setProfile(profile);
+                this.gardenSpeciesStoreService.updateGardenSpecies(
+                    profile,
+                    this.profileStoreService.collectionMap()
+                );
             })
         );
     }
