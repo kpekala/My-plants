@@ -1,7 +1,7 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthService } from '../../auth/auth.service';
 import { ProfileService } from '../home/profile/profile.service';
@@ -23,7 +23,8 @@ export class NavigationComponent implements OnInit {
         private readonly profileService: ProfileService,
         private readonly searchStoreService: SearchStoreService,
         private readonly destroyRef: DestroyRef,
-        private readonly showCookieStoreService: ShowCookieStoreService
+        private readonly showCookieStoreService: ShowCookieStoreService,
+        private readonly activatedRoute: ActivatedRoute
     ) {}
 
     search = new FormControl('');
@@ -58,5 +59,9 @@ export class NavigationComponent implements OnInit {
 
     onShowCookieBanner() {
         this.showCookieStoreService.setShow();
+    }
+
+    onPrivacyPolicyClick() {
+        window.open(`${window.location.origin}/assets/privacy-policy.txt`);
     }
 }

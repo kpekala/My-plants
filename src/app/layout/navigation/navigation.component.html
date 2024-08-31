@@ -57,12 +57,11 @@
                     >
                         Sign out
                     </li>
-                    <li class="dropdown-item menu-item">
-                        <a
-                            href="./../../../assets/privacy-policy.txt"
-                            class="link"
-                            >Privacy Policy</a
-                        >
+                    <li
+                        class="dropdown-item menu-item"
+                        (click)="onPrivacyPolicyClick()"
+                    >
+                        Privacy Policy
                     </li>
                     <li
                         (click)="onShowCookieBanner()"
