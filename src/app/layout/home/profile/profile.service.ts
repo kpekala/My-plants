@@ -106,7 +106,13 @@ export class ProfileService {
         const oldSize = this.profileStoreService.collectionMap()[plantId] ?? 0;
         const size = newSize - oldSize;
         if (size > 0) {
-            profile.collection.push(...Array(size).fill({ id: plantId }));
+            for (let i = 0; i < size; i++) {
+                profile.collection.push({
+                    id: plantId,
+                    plantId: profile.collection.length,
+                    lastTimeWatered: null,
+                });
+            }
             return this.updateProfile(profile).pipe(
                 tap(() => {
                     this.profileStoreService.setCollectionMap(

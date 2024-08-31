@@ -47,7 +47,7 @@ export class GardenService {
     waterPlant(id: number) {
         const profile = this.profileStoreService.profile();
         profile.collection = profile.collection.map((plant) => {
-            if (plant.id === id) {
+            if (plant.plantId === id) {
                 plant.lastTimeWatered = new Date();
             }
             return plant;

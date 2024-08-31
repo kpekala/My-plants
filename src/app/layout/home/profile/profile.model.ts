@@ -14,4 +14,5 @@ export class Profile {
 export interface SpecificPlant {
     id: number;
     lastTimeWatered: Date;
+    plantId: number;
 }

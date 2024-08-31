@@ -7,5 +7,6 @@ export class GardenPlantsStoreService {
 
     setGardenSpecies(plants: GardenSpecies[]) {
         this.gardenPlants.set(plants);
+        console.log('siema');
     }
 }

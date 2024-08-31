@@ -18,7 +18,7 @@ export class PlantAccordionItemComponent {
     }
 
     lastTimeWatered(plant: SpecificPlant) {
-        const dateString = new Date(plant.lastTimeWatered)?.toUTCString();
+        const dateString = new Date(plant.lastTimeWatered)?.toDateString();
         return dateString === 'Invalid Date' ? 'never' : dateString;
     }
 }
