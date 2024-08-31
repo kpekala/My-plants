@@ -1,5 +1,5 @@
-import { Component, input } from '@angular/core';
-import { Species } from '../../species/species.model';
+import { Component, input, output } from '@angular/core';
+import { SpecificPlant } from '../../home/profile/profile.model';
 
 @Component({
     selector: 'app-plant-accordion-item',
@@ -11,4 +11,14 @@ import { Species } from '../../species/species.model';
 export class PlantAccordionItemComponent {
     plantName = input();
     plantsFromOneSpecies = input<any>();
+    onWaterPlantClick = output<number>();
+
+    handleWaterPlantClick(id: number) {
+        this.onWaterPlantClick.emit(id);
+    }
+
+    lastTimeWatered(plant: SpecificPlant) {
+        const dateString = new Date(plant.lastTimeWatered)?.toUTCString();
+        return dateString === 'Invalid Date' ? 'never' : dateString;
+    }
 }

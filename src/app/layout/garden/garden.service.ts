@@ -43,4 +43,19 @@ export class GardenService {
                 })
             );
     }
+
+    waterPlant(id: number) {
+        const profile = this.profileStoreService.profile();
+        profile.collection = profile.collection.map((plant) => {
+            if (plant.id === id) {
+                plant.lastTimeWatered = new Date();
+            }
+            return plant;
+        });
+        return this.profileService.updateProfile(profile).pipe(
+            tap(() => {
+                this.profileStoreService.setProfile(profile);
+            })
+        );
+    }
 }

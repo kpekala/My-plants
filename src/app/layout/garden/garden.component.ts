@@ -37,4 +37,11 @@ export class GardenComponent implements OnInit {
             .state()
             .filter((plant) => plant.id === id)[0];
     }
+
+    handleWaterPlantClick(id: number) {
+        this.gardenService
+            .waterPlant(id)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe();
+    }
 }
