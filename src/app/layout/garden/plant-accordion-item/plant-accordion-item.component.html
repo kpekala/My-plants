@@ -9,12 +9,28 @@
         <span class="watered">
             Last time watered:
             {{ lastTimeWatered(plant) }}
-            <button
-                class="btn btn-primary"
-                (click)="handleWaterPlantClick(plant.plantId)"
-            >
-                Water the plant
-            </button>
+            <div ngbDropdown class="d-inline-block">
+                <button
+                    type="button"
+                    class="btn btn-outline-primary"
+                    id="dropdownBasic1"
+                    ngbDropdownToggle
+                >
+                    Options
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                    <button
+                        ngbDropdownItem
+                        (click)="handleWaterPlantClick(plant.plantId)"
+                    >
+                        Water the plant
+                    </button>
+                    <button ngbDropdownItem (click)="handleRenamePlant()">
+                        Rename
+                    </button>
+                    <button ngbDropdownItem style="color: red">Remove</button>
+                </div>
+            </div>
         </span>
     </li>
     }

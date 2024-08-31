@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { SpecificPlant } from '../../home/profile/profile.model';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-plant-accordion-item',
     standalone: true,
-    imports: [],
+    imports: [NgbDropdownModule],
     templateUrl: './plant-accordion-item.component.html',
     styleUrl: './plant-accordion-item.component.scss',
 })
@@ -21,4 +22,6 @@ export class PlantAccordionItemComponent {
         const dateString = new Date(plant.lastTimeWatered)?.toDateString();
         return dateString === 'Invalid Date' ? 'never' : dateString;
     }
+
+    handleRenamePlant() {}
 }
