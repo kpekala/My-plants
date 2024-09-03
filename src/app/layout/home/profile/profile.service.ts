@@ -7,6 +7,7 @@ import { LocalStorageService } from 'src/app/data/local-storage.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SpeciesService } from '../../species/species.service';
 import { ProfileStoreService } from './profile.store.service';
+import { SpeciesStoreService } from '../../species/species.store.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
@@ -18,7 +19,8 @@ export class ProfileService {
         private localStorageService: LocalStorageService,
         private authService: AuthService,
         private speciesService: SpeciesService,
-        private profileStoreService: ProfileStoreService
+        private profileStoreService: ProfileStoreService,
+        private readonly speciesStoreService: SpeciesStoreService
     ) {}
 
     createProfile(
@@ -105,12 +107,17 @@ export class ProfileService {
         const profile: Profile = this.profileStoreService.profile();
         const oldSize = this.profileStoreService.collectionMap()[plantId] ?? 0;
         const size = newSize - oldSize;
+        const species = this.speciesStoreService.findById(plantId);
         if (size > 0) {
             for (let i = 0; i < size; i++) {
                 profile.collection.push({
                     id: plantId,
                     plantId: profile.collection.length,
                     lastTimeWatered: null,
+                    plantName:
+                        species.speciesName +
+                        ' No. ' +
+                        profile.collection.length,
                 });
             }
             return this.updateProfile(profile).pipe(

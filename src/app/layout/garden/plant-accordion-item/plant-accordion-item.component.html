@@ -2,9 +2,7 @@
     @for (plant of plantsFromOneSpecies(); track $index ) {
     <li class="list-group-item" style="display: flex; align-items: center">
         <span>
-            {{ plantName() }}
-            No.
-            {{ $index }}
+            {{ plant.plantName }}
         </span>
         <span class="watered">
             Last time watered:

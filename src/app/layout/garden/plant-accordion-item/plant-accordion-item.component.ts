@@ -14,6 +14,7 @@ export class PlantAccordionItemComponent {
     plantsFromOneSpecies = input<any>();
     onWaterPlantClick = output<number>();
     onRemovePlantClick = output<number>();
+    onRenamePlant = output<{ id: number; newName: string }>();
 
     handleWaterPlantClick(id: number) {
         this.onWaterPlantClick.emit(id);

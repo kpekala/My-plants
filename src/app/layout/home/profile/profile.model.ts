@@ -15,4 +15,5 @@ export interface SpecificPlant {
     id: number;
     lastTimeWatered: Date;
     plantId: number;
+    plantName: string;
 }

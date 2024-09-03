@@ -9,7 +9,7 @@ export class SpeciesStoreService {
         this.state.set(species);
     }
 
-    findById(id: number) {
+    findById(id: number): Species {
         return this.state().filter((s) => s.id === id)[0];
     }
 }
