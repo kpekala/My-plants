@@ -1,9 +1,17 @@
 <ul class="list-group list-group-flush">
     @for (plant of plantsFromOneSpecies(); track $index ) {
     <li class="list-group-item" style="display: flex; align-items: center">
-        <span>
+        @if (!showPlantNameInput() || inputId() !== plant.plantId) {
+        <span (click)="onPlantNameClick(plant)">
             {{ plant.plantName }}
         </span>
+        } @else {
+        <input
+            type="text"
+            [(ngModel)]="plantNameInput"
+            (keypress)="onKeyPress($event)"
+        />
+        }
         <span class="watered">
             Last time watered:
             {{ lastTimeWatered(plant) }}

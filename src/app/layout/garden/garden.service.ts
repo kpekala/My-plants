@@ -64,4 +64,22 @@ export class GardenService {
             })
         );
     }
+
+    renamePlant(plantId: number, newName: string) {
+        const profile = this.profileStoreService.profile();
+        profile.collection = profile.collection.map((plant) => {
+            if (plant.plantId === plantId) {
+                plant.plantName = newName;
+            }
+            return plant;
+        });
+        return this.profileService.updateProfile(profile).pipe(
+            tap(() => {
+                this.gardenSpeciesStoreService.updateGardenSpecies(
+                    profile,
+                    this.profileStoreService.collectionMap()
+                );
+            })
+        );
+    }
 }

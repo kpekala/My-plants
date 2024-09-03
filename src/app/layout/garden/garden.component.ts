@@ -51,4 +51,11 @@ export class GardenComponent implements OnInit {
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe();
     }
+
+    handleRenamePlant(event: { id: number; newName: string }) {
+        this.gardenService
+            .renamePlant(event.id, event.newName)
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe();
+    }
 }
