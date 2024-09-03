@@ -114,10 +114,7 @@ export class ProfileService {
                     id: plantId,
                     plantId: profile.collection.length,
                     lastTimeWatered: null,
-                    plantName:
-                        species.speciesName +
-                        ' No. ' +
-                        profile.collection.length,
+                    plantName: species.speciesName + ' No. ' + (oldSize + 1),
                 });
             }
             return this.updateProfile(profile).pipe(
