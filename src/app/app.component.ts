@@ -29,7 +29,6 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         const key = localStorage.getItem(this.cookieConsentKey);
         if (key !== null && key === '1') {
-            console.log('Siema');
             this.ccService.destroy();
         }
         this.showCookieStoreService.show$.subscribe({
