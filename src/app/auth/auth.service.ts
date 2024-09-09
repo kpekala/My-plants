@@ -53,12 +53,8 @@ export class AuthService {
         getAuth()
             .signOut()
             .then(
-                () => {
-                    console.log('Signed Out');
-                },
-                (error) => {
-                    console.error('Sign Out Error', error);
-                }
+                () => {},
+                (error) => {}
             );
     }
 

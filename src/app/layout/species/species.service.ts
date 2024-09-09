@@ -42,7 +42,6 @@ export class SpeciesService {
             }),
             tap((species) => {
                 this.speciesStoreService.setSpecies(species);
-                console.log(species);
             })
         );
     }
@@ -98,7 +97,6 @@ export class SpeciesService {
                 };
                 const url = `${this.speciesUrl}/${species.id}.json`;
                 species.pending = false;
-                console.log(species);
                 return this.http.put(url, species, { params });
             })
         );
