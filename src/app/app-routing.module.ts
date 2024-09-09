@@ -9,6 +9,7 @@ import { authGuard } from './auth/auth-guard';
 import { profileResolver } from './layout/home/profile/profile-resolver';
 import { SpeciesComponent } from './layout/species/species.component';
 import { GardenComponent } from './layout/garden/garden.component';
+import { AdminComponent } from './layout/admin/admin.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'app/home', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
             },
             { path: 'find', component: SpeciesComponent },
             { path: 'garden', component: GardenComponent },
+            { path: 'admin', component: AdminComponent },
         ],
     },
     {

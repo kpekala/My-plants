@@ -1,4 +1,4 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import { ProfileService } from '../home/profile/profile.service';
 import { SearchStoreService } from './search.store.service';
 import { ShowCookieStoreService } from 'src/app/config/show-cookie.store.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { AdminService } from '../admin/admin.service';
 
 @Component({
     selector: 'app-navigation',
@@ -24,16 +25,25 @@ export class NavigationComponent implements OnInit {
         private readonly searchStoreService: SearchStoreService,
         private readonly destroyRef: DestroyRef,
         private readonly showCookieStoreService: ShowCookieStoreService,
-        private readonly activatedRoute: ActivatedRoute
+        private readonly adminService: AdminService
     ) {}
 
     search = new FormControl('');
+    isAdmin = signal(false);
 
     ngOnInit(): void {
         this.search.valueChanges
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe((changes) => {
                 this.searchStoreService.setSearch(changes);
+            });
+        this.adminService
+            .isAdmin()
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe({
+                next: (isAdmin: boolean) => {
+                    this.isAdmin.set(isAdmin);
+                },
             });
     }
 

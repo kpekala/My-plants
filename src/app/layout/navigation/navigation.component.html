@@ -26,6 +26,16 @@
                     >Garden</a
                 >
             </li>
+            @if(isAdmin()) {
+            <li class="nav-item" routerLinkActive="active">
+                <a
+                    routerLink="/app/admin"
+                    class="nav-link"
+                    routerLinkActive="active"
+                    >Admin Panel</a
+                >
+            </li>
+            }
         </ul>
         <span class="right">
             <form class="d-flex me-3" role="search">
