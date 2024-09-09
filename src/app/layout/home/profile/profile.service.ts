@@ -144,7 +144,8 @@ export class ProfileService {
                     id: plantId,
                     plantId: profile.collection.length,
                     lastTimeWatered: null,
-                    plantName: species.speciesName + ' No. ' + (oldSize + 1),
+                    plantName:
+                        species.speciesName + ' No. ' + (oldSize + i + 1),
                 });
             }
             return this.updateProfile(profile).pipe(
@@ -160,7 +161,6 @@ export class ProfileService {
 
     public parseCollection(profile: Profile) {
         const collectionMap = {};
-        console.log(profile);
         profile.collection.forEach((item) => {
             if (item && item.id !== undefined) {
                 const idString = `${item.id}`;

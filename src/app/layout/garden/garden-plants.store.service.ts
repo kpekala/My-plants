@@ -19,7 +19,7 @@ export class GardenPlantsStoreService {
             const idNumb = Number(id);
             const specificPlants = profile.collection
                 .filter((plant) => plant.id === idNumb)
-                .map((plant) => {
+                .map((plant, index) => {
                     return { ...plant };
                 });
             speciesList.push({

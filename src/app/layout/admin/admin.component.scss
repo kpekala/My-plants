@@ -1,0 +1,17 @@
+.species-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+img {
+    border-radius: 1rem;
+}
+
+.buttons-container {
+    display: flex;
+    margin-left: auto;
+    gap: 1rem;
+}

@@ -3,7 +3,7 @@
         <ng-container
             *ngFor="let plant of this.plantsStoreService.state(); index as i"
         >
-            <div *ngIf="showItem(i)">
+            <div *ngIf="showItem(plant.id)">
                 <app-plant
                     [plant]="plant"
                     (showDetails)="onShowDetails(plant)"

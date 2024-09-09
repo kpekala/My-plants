@@ -1,1 +1,40 @@
-<p>admin works!</p>
+<div class="container">
+    <div class="row justify-content-center align-center">
+        <div class="col-md-10 pt-3">
+            @if(pendingSpecies() !== null) {
+            <ul class="list-group">
+                @for (species of pendingSpecies(); track species.id) {
+                <li class="list-group-item">
+                    <div class="species-container">
+                        <span style="font-size: 1.6rem">{{
+                            species.speciesName
+                        }}</span>
+                        <img
+                            src="{{ species.imageUrl }}"
+                            alt=""
+                            style="width: 200px"
+                        />
+                        <span>{{ species.description }}</span>
+                        <span
+                            >Wikipedia link:
+                            <a [href]="species.link">{{
+                                species.link
+                            }}</a></span
+                        >
+                        <span class="buttons-container">
+                            <button
+                                class="btn btn-primary"
+                                (click)="onApproveClick(species)"
+                            >
+                                Approve
+                            </button>
+                            <button class="btn btn-danger">Delete</button>
+                        </span>
+                    </div>
+                </li>
+                }
+            </ul>
+            }
+        </div>
+    </div>
+</div>

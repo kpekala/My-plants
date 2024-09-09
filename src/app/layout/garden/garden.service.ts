@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { SpeciesStoreService } from '../species/species.store.service';
-import { SpeciesService } from '../species/species.service';
 import { switchMap, tap } from 'rxjs';
+import { Profile } from '../home/profile/profile.model';
 import { ProfileService } from '../home/profile/profile.service';
 import { ProfileStoreService } from '../home/profile/profile.store.service';
+import { SpeciesService } from '../species/species.service';
 import { GardenPlantsStoreService } from './garden-plants.store.service';
-import { GardenSpecies } from './plant-accordion-item/garden.model';
-import { Profile } from '../home/profile/profile.model';
 
 @Injectable({ providedIn: 'root' })
 export class GardenService {
@@ -14,8 +12,7 @@ export class GardenService {
         private readonly profileService: ProfileService,
         private readonly profileStoreService: ProfileStoreService,
         private readonly speciesService: SpeciesService,
-        private readonly gardenSpeciesStoreService: GardenPlantsStoreService,
-        private readonly speciesStoreService: SpeciesStoreService
+        private readonly gardenSpeciesStoreService: GardenPlantsStoreService
     ) {}
 
     fetchGardenData() {

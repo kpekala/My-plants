@@ -1,16 +1,18 @@
-import { Injectable } from '@angular/core';
-import { NewSpecies, Species } from './species.model';
-import { Observable, Subject, map, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { SpeciesStoreService } from './species.store.service';
+import { Injectable } from '@angular/core';
+import { Observable, map, of, switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { NewSpecies, Species } from './species.model';
+import { SpeciesStoreService } from './species.store.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class SpeciesService {
-    private speciesUrl =
+    private speciesFinalUrl =
         'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/species.json';
+    private speciesUrl =
+        'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/species/';
 
     constructor(
         private readonly http: HttpClient,
@@ -19,12 +21,14 @@ export class SpeciesService {
     ) {}
 
     fetchAllSpecies() {
-        return this.http.get<Species[]>(this.speciesUrl).pipe(
+        return this.http.get<Species[]>(this.speciesFinalUrl).pipe(
             map((speciesMap: object) => {
-                let species = Object.values(speciesMap);
-                species = species.filter((s) => s !== null);
-                for (let i = 0; i < species.length; i++) {
-                    species[i].id = i;
+                const entries = Object.entries(speciesMap);
+                const species = [];
+                for (let i = 0; i < entries.length; i++) {
+                    const id = entries[i][1].id;
+                    if (id === undefined || id === null) entries[i][1].id = i;
+                    species.push(entries[i][1]);
                 }
                 return species;
             })
@@ -38,6 +42,7 @@ export class SpeciesService {
             }),
             tap((species) => {
                 this.speciesStoreService.setSpecies(species);
+                console.log(species);
             })
         );
     }
@@ -50,13 +55,14 @@ export class SpeciesService {
         );
     }
 
-    updateSpecies(species: Species[]): Observable<any> {
+    updateSpecies(species: Species): Observable<any> {
         return this.authService.getUserToken().pipe(
             switchMap((token: string) => {
                 const params = {
                     auth: token,
                 };
-                return this.http.put(this.speciesUrl, species, { params });
+                const url = `${this.speciesUrl}/${species.id}.json`;
+                return this.http.put(url, species, { params });
             })
         );
     }
@@ -65,25 +71,35 @@ export class SpeciesService {
         speciesId: number,
         popularityChange: number
     ): Observable<any> {
-        let fetchPlantsSub = this.fetchApprovedSpecies();
-        return fetchPlantsSub.pipe(
-            switchMap((species: Species[]) => {
-                species[speciesId].ownersCount += popularityChange;
-                return this.updateSpecies(species);
-            })
-        );
+        const species = this.speciesStoreService.findById(speciesId);
+        species.ownersCount += popularityChange;
+        return this.updateSpecies(species);
     }
 
     addSpecies(plant: NewSpecies) {
         const species = plant.mapToSpecies();
         species.id = new Date().getTime();
-
         return this.authService.getUserToken().pipe(
             switchMap((token: string) => {
                 const params = {
                     auth: token,
                 };
-                return this.http.post(this.speciesUrl, species, { params });
+                const url = `${this.speciesUrl}/${species.id}.json`;
+                return this.http.put(url, species, { params });
+            })
+        );
+    }
+
+    approveSpecies(species: Species) {
+        return this.authService.getUserToken().pipe(
+            switchMap((token: string) => {
+                const params = {
+                    auth: token,
+                };
+                const url = `${this.speciesUrl}/${species.id}.json`;
+                species.pending = false;
+                console.log(species);
+                return this.http.put(url, species, { params });
             })
         );
     }
