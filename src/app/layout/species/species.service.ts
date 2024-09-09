@@ -18,18 +18,34 @@ export class SpeciesService {
         private readonly authService: AuthService
     ) {}
 
-    fetchApprovedPlants(): Observable<Species[]> {
+    fetchAllSpecies() {
         return this.http.get<Species[]>(this.speciesUrl).pipe(
             map((speciesMap: object) => {
                 let species = Object.values(speciesMap);
-                species = species.filter((s) => s !== null && !s.pending);
+                species = species.filter((s) => s !== null);
                 for (let i = 0; i < species.length; i++) {
                     species[i].id = i;
                 }
                 return species;
+            })
+        );
+    }
+
+    fetchApprovedSpecies(): Observable<Species[]> {
+        return this.fetchAllSpecies().pipe(
+            map((species: Species[]) => {
+                return species.filter((s) => !s.pending);
             }),
             tap((species) => {
                 this.speciesStoreService.setSpecies(species);
+            })
+        );
+    }
+
+    fetchPendingSpecies() {
+        return this.fetchAllSpecies().pipe(
+            map((species: Species[]) => {
+                return species.filter((s) => s.pending);
             })
         );
     }
@@ -49,7 +65,7 @@ export class SpeciesService {
         speciesId: number,
         popularityChange: number
     ): Observable<any> {
-        let fetchPlantsSub = this.fetchApprovedPlants();
+        let fetchPlantsSub = this.fetchApprovedSpecies();
         return fetchPlantsSub.pipe(
             switchMap((species: Species[]) => {
                 species[speciesId].ownersCount += popularityChange;
