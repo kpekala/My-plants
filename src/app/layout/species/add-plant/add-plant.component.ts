@@ -4,46 +4,52 @@ import { SpeciesService } from '../species.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-plant',
-  templateUrl: './add-plant.component.html',
-  styleUrls: ['./add-plant.component.scss']
+    selector: 'app-add-plant',
+    templateUrl: './add-plant.component.html',
+    styleUrls: ['./add-plant.component.scss'],
 })
-export class AddPlantComponent implements OnInit{
+export class AddPlantComponent implements OnInit {
+    @Output() close = new EventEmitter<any>();
 
-  @Output() close = new EventEmitter<any>(); 
+    isSaving = false;
+    speciesForm: FormGroup;
 
-  plant: NewSpecies = new NewSpecies();
-  isSaving = false;
-  speciesForm: FormGroup;
+    constructor(private speciesService: SpeciesService) {}
 
-  constructor(private speciesService: SpeciesService){
+    ngOnInit(): void {
+        this.speciesForm = new FormGroup({
+            name: new FormControl('', Validators.required),
+            description: new FormControl('', Validators.required),
+            link: new FormControl('', Validators.required),
+            imageUrl: new FormControl('', Validators.required),
+            family: new FormControl('', Validators.required),
+        });
+    }
 
-  }
+    onClose() {
+        this.close.emit();
+    }
 
-  ngOnInit(): void {
-    this.speciesForm = new FormGroup({
-      'name': new FormControl('', Validators.required),
-      'description': new FormControl('', Validators.required),
-      'link': new FormControl('', Validators.required),
-      'imageUrl': new FormControl('', Validators.required),
-      'family': new FormControl('', Validators.required)
-    });
-  }
+    onSave() {
+        this.isSaving = true;
 
-  onClose() {
-    this.close.emit();
-  }
+        const species = new NewSpecies(
+            this.speciesForm.controls['name'].value,
+            this.speciesForm.controls['imageUrl'].value,
+            this.speciesForm.controls['family'].value,
+            this.speciesForm.controls['description'].value,
+            this.speciesForm.controls['link'].value
+        );
 
-  onSave() {
-    this.isSaving = true;
-    this.speciesService.addSpecies(this.plant).subscribe({
-      next: () => {
-        this.isSaving = false;
-        this.onClose();
-      },error: (_) => {
-        this.isSaving = false;
-        this.onClose();
-      }
-    });
-  }
+        this.speciesService.addSpecies(species).subscribe({
+            next: () => {
+                this.isSaving = false;
+                this.onClose();
+            },
+            error: (_) => {
+                this.isSaving = false;
+                this.onClose();
+            },
+        });
+    }
 }

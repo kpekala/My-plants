@@ -16,10 +16,11 @@ export class SpeciesService {
         private speciesStoreService: SpeciesStoreService
     ) {}
 
-    fetchPlants(): Observable<Species[]> {
+    fetchApprovedPlants(): Observable<Species[]> {
         return this.http.get<Species[]>(this.speciesUrl).pipe(
-            map((species: Species[]) => {
-                species = species.filter((s) => s !== null);
+            map((speciesMap: object) => {
+                let species = Object.values(speciesMap);
+                species = species.filter((s) => s !== null && !s.pending);
                 for (let i = 0; i < species.length; i++) {
                     species[i].id = i;
                 }
@@ -39,7 +40,7 @@ export class SpeciesService {
         speciesId: number,
         popularityChange: number
     ): Observable<any> {
-        let fetchPlantsSub = this.fetchPlants();
+        let fetchPlantsSub = this.fetchApprovedPlants();
         return fetchPlantsSub.pipe(
             switchMap((species: Species[]) => {
                 species[speciesId].ownersCount += popularityChange;
@@ -49,11 +50,8 @@ export class SpeciesService {
     }
 
     addSpecies(plant: NewSpecies) {
-        return this.fetchPlants().pipe(
-            switchMap((species: Species[]) => {
-                species.push(plant.mapToSpecies());
-                return this.updateSpecies(species);
-            })
-        );
+        const species = plant.mapToSpecies();
+        species.id = new Date().getTime();
+        return this.http.post(this.speciesUrl, species);
     }
 }
