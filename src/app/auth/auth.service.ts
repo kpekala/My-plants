@@ -1,83 +1,87 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    getAuth,
+    signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { LocalStorageService } from '../data/local-storage.service';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../data/firebase.service';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class AuthService {
-  private USER_LOGGED_IN_KEY = 'USER_LOGGED_IN_KEY';
+    private USER_LOGGED_IN_KEY = 'USER_LOGGED_IN_KEY';
 
-  constructor(
-    private localStorageService: LocalStorageService,
-    private router: Router,
-    private firebaseService: FirebaseService
-  ) {
-    this.registerUserStateChangeListener();
-  }
+    constructor(
+        private localStorageService: LocalStorageService,
+        private router: Router,
+        private firebaseService: FirebaseService
+    ) {
+        this.registerUserStateChangeListener();
+    }
 
-  isLoggedIn(): Observable<boolean> {
-    return new Observable((subscriber) => {
-      getAuth().onAuthStateChanged((user) => {
-        subscriber.next(user != null);
-      });
-    });
-  }
+    isLoggedIn(): Observable<boolean> {
+        return new Observable((subscriber) => {
+            getAuth().onAuthStateChanged((user) => {
+                subscriber.next(user != null);
+            });
+        });
+    }
 
-  login(email: string, password: string) {
-    const auth = getAuth();
-    return signInWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        const user = userCredential.user;
-      }
-    );
-  }
+    login(email: string, password: string) {
+        const auth = getAuth();
+        return signInWithEmailAndPassword(auth, email, password).then(
+            (userCredential) => {
+                const user = userCredential.user;
+            }
+        );
+    }
 
-  register(email: string, password: string) {
-    const auth = getAuth();
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        const user = userCredential.user;
-      }
-    );
-  }
+    register(email: string, password: string) {
+        const auth = getAuth();
+        return createUserWithEmailAndPassword(auth, email, password).then(
+            (userCredential) => {
+                const user = userCredential.user;
+            }
+        );
+    }
 
-  signOut() {
-    getAuth()
-      .signOut()
-      .then(
-        () => {
-          console.log('Signed Out');
-        },
-        (error) => {
-          console.error('Sign Out Error', error);
-        }
-      );
-  }
+    signOut() {
+        getAuth()
+            .signOut()
+            .then(
+                () => {
+                    console.log('Signed Out');
+                },
+                (error) => {
+                    console.error('Sign Out Error', error);
+                }
+            );
+    }
 
-  removeAccount() {
-    return getAuth().currentUser.delete();
-  }
+    removeAccount() {
+        return getAuth().currentUser.delete();
+    }
 
-  private registerUserStateChangeListener() {
-    getAuth().onAuthStateChanged((user) => {
-      if (user) {
-        localStorage.setItem(this.USER_LOGGED_IN_KEY, 'true');
-      } else {
-        localStorage.removeItem(this.USER_LOGGED_IN_KEY);
-        this.router.navigate(['auth/login']);
-      }
-    });
-  }
+    private registerUserStateChangeListener() {
+        getAuth().onAuthStateChanged((user) => {
+            if (user) {
+                localStorage.setItem(this.USER_LOGGED_IN_KEY, 'true');
+            } else {
+                localStorage.removeItem(this.USER_LOGGED_IN_KEY);
+                this.router.navigate(['auth/login']);
+            }
+        });
+    }
 
-  getUserId() {
-    return getAuth().currentUser.uid;
-  }
+    getUserId() {
+        return getAuth().currentUser.uid;
+    }
+
+    getUserToken() {
+        return from(getAuth().currentUser.getIdToken());
+    }
 }

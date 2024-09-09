@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { NewSpecies, Species } from '../species.model';
-import { SpeciesService } from '../species.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NewSpecies } from '../species.model';
+import { SpeciesService } from '../species.service';
 
 @Component({
     selector: 'app-add-plant',

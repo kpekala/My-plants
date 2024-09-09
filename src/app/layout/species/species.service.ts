@@ -3,6 +3,7 @@ import { NewSpecies, Species } from './species.model';
 import { Observable, Subject, map, switchMap, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SpeciesStoreService } from './species.store.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -12,8 +13,9 @@ export class SpeciesService {
         'https://my-plants-bd49c-default-rtdb.europe-west1.firebasedatabase.app/species.json';
 
     constructor(
-        private http: HttpClient,
-        private speciesStoreService: SpeciesStoreService
+        private readonly http: HttpClient,
+        private readonly speciesStoreService: SpeciesStoreService,
+        private readonly authService: AuthService
     ) {}
 
     fetchApprovedPlants(): Observable<Species[]> {
@@ -33,7 +35,14 @@ export class SpeciesService {
     }
 
     updateSpecies(species: Species[]): Observable<any> {
-        return this.http.put(this.speciesUrl, species);
+        return this.authService.getUserToken().pipe(
+            switchMap((token: string) => {
+                const params = {
+                    auth: token,
+                };
+                return this.http.put(this.speciesUrl, species, { params });
+            })
+        );
     }
 
     changeSpeciesPopularity(
@@ -52,6 +61,14 @@ export class SpeciesService {
     addSpecies(plant: NewSpecies) {
         const species = plant.mapToSpecies();
         species.id = new Date().getTime();
-        return this.http.post(this.speciesUrl, species);
+
+        return this.authService.getUserToken().pipe(
+            switchMap((token: string) => {
+                const params = {
+                    auth: token,
+                };
+                return this.http.post(this.speciesUrl, species, { params });
+            })
+        );
     }
 }

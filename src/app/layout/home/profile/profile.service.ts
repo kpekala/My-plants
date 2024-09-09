@@ -29,17 +29,38 @@ export class ProfileService {
         email: string
     ): Observable<any> {
         const newProfile = new Profile(email, username, '', [], []);
-        return this.http
-            .put(`${this.profileUrl}/${userId}.json`, newProfile)
-            .pipe(
-                tap((result) => {
-                    this.localStorageService.saveData('profile-id', userId);
-                })
-            );
+        return this.authService.getUserToken().pipe(
+            switchMap((token: string) => {
+                const params = {
+                    auth: token,
+                };
+                return this.http
+                    .put(`${this.profileUrl}/${userId}.json`, newProfile, {
+                        params,
+                    })
+                    .pipe(
+                        tap((result) => {
+                            this.localStorageService.saveData(
+                                'profile-id',
+                                userId
+                            );
+                        })
+                    );
+            })
+        );
     }
 
     deleteProfile(userId: string): Observable<any> {
-        return this.http.delete(`${this.profileUrl}/${userId}.json`);
+        return this.authService.getUserToken().pipe(
+            switchMap((token: string) => {
+                const params = {
+                    auth: token,
+                };
+                return this.http.delete(`${this.profileUrl}/${userId}.json`, {
+                    params,
+                });
+            })
+        );
     }
 
     getProfile(): Observable<any> {
@@ -61,13 +82,22 @@ export class ProfileService {
 
     updateProfile(profile: Profile) {
         const userId = this.authService.getUserId();
-        return this.http
-            .patch(`${this.profileUrl}/${userId}.json`, profile)
-            .pipe(
-                tap(() => {
-                    this.profileStoreService.setProfile(profile);
-                })
-            );
+        return this.authService.getUserToken().pipe(
+            switchMap((token: string) => {
+                const params = {
+                    auth: token,
+                };
+                return this.http
+                    .patch(`${this.profileUrl}/${userId}.json`, profile, {
+                        params,
+                    })
+                    .pipe(
+                        tap(() => {
+                            this.profileStoreService.setProfile(profile);
+                        })
+                    );
+            })
+        );
     }
 
     addPlantToFavorites(speciesId: number) {
