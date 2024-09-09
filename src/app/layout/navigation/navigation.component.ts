@@ -47,12 +47,12 @@ export class NavigationComponent implements OnInit {
         );
         if (shouldRemove) {
             const userToken = this.authService.getUserId();
-            this.authService.removeAccount().then((result) => {
-                this.profileService.deleteProfile(userToken).subscribe({
-                    next: () => {
+            this.profileService.deleteProfile(userToken).subscribe({
+                next: () => {
+                    this.authService.removeAccount().then(() => {
                         this.router.navigate(['/auth']);
-                    },
-                });
+                    });
+                },
             });
         }
     }
