@@ -1,15 +1,13 @@
 import { Component, input, OnInit, signal } from '@angular/core';
-import { finalize, Subscription, take } from 'rxjs';
-import { Profile } from '../home/profile/profile.model';
+import { Subscription } from 'rxjs';
 import { ProfileService } from '../home/profile/profile.service';
 import { ProfileStoreService } from '../home/profile/profile.store.service';
 import { SearchStoreService } from '../navigation/search.store.service';
+import { ChangeSizeState } from './plant-modal/plant-modal.component';
 import { ToggleFavEvent } from './plant/plant.component';
-import { SpeciesStoreService } from './species.store.service';
 import { Species } from './species.model';
 import { SpeciesService } from './species.service';
-import { ChangeSizeState } from './plant-modal/plant-modal.component';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { SpeciesStoreService } from './species.store.service';
 
 @Component({
     selector: 'app-find-plants',

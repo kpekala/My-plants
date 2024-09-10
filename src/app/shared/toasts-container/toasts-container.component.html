@@ -1,0 +1,7 @@
+<div class="toasts-container">
+    @for (toast of toasts; track $index) {
+    <ngb-toast [autohide]="true" [delay]="5000" [class]="toast.className">
+        <div>{{ toast.message }}</div>
+    </ngb-toast>
+    }
+</div>
