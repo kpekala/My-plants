@@ -22,6 +22,7 @@
         (onItemsChanged)="reloadSpecies()"
         [initialCollectionSize]="collectionSize(selectedSpecies)"
         (onChangeCollectionSize)="onChangeCollectionSize($event)"
+        [changeSizeState]="changeSizeState()"
     >
     </app-plant-modal>
     <app-add-plant *ngIf="addingPlant" (close)="onCloseAddPlantView()">

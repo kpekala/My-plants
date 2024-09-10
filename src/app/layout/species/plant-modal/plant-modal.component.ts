@@ -8,6 +8,11 @@ import {
 } from '@angular/core';
 import { Species } from '../species.model';
 
+export enum ChangeSizeState {
+    ERROR = 1,
+    LOADING = 2,
+    NOTHING = 3,
+}
 @Component({
     selector: 'app-plant-modal',
     templateUrl: './plant-modal.component.html',
@@ -17,6 +22,7 @@ export class PlantModalComponent implements OnInit {
     @Input() plant!: Species;
     @Input() initialCollectionSize: number;
     @Input() isCollectionItem: boolean;
+    @Input() changeSizeState: ChangeSizeState;
     @Output() closeModal = new EventEmitter();
     @Output() onItemsChanged = new EventEmitter();
     @Output() onChangeCollectionSize = new EventEmitter<number>();
@@ -36,5 +42,9 @@ export class PlantModalComponent implements OnInit {
 
     onChangeCollectionSizeClick() {
         this.onChangeCollectionSize.emit(this.collectionSize());
+    }
+
+    isChangeStateLoading() {
+        return this.changeSizeState === ChangeSizeState.LOADING;
     }
 }

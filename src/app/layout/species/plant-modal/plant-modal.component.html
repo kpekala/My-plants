@@ -24,6 +24,7 @@
                 type="button"
                 id="button-add"
                 (click)="onChangeCollectionSizeClick()"
+                [disabled]="isChangeStateLoading()"
             >
                 Change collection size
             </button>

@@ -1,5 +1,5 @@
 import { Component, input, OnInit, signal } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { finalize, Subscription, take } from 'rxjs';
 import { Profile } from '../home/profile/profile.model';
 import { ProfileService } from '../home/profile/profile.service';
 import { ProfileStoreService } from '../home/profile/profile.store.service';
@@ -8,6 +8,8 @@ import { ToggleFavEvent } from './plant/plant.component';
 import { SpeciesStoreService } from './species.store.service';
 import { Species } from './species.model';
 import { SpeciesService } from './species.service';
+import { ChangeSizeState } from './plant-modal/plant-modal.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-find-plants',
@@ -18,6 +20,7 @@ export class SpeciesComponent implements OnInit {
     isCollection = input(false);
 
     search = signal('');
+    changeSizeState = signal(ChangeSizeState.NOTHING);
 
     speciesDetailsSub: Subscription;
     showModal = false;
@@ -115,6 +118,14 @@ export class SpeciesComponent implements OnInit {
 
     onChangeCollectionSize(newSize: number) {
         const id = this.selectedSpecies.id ?? -1;
-        this.profileService.changeCollectionSize(id, newSize).subscribe();
+        this.changeSizeState.set(ChangeSizeState.LOADING);
+        this.profileService.changeCollectionSize(id, newSize).subscribe({
+            next: () => {
+                this.changeSizeState.set(ChangeSizeState.NOTHING);
+            },
+            error: (err) => {
+                this.changeSizeState.set(ChangeSizeState.ERROR);
+            },
+        });
     }
 }
