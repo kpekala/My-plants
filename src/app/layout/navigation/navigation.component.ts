@@ -9,6 +9,7 @@ import { SearchStoreService } from './search.store.service';
 import { ShowCookieStoreService } from 'src/app/config/show-cookie.store.service';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminService } from '../admin/admin.service';
+import { ToastService } from 'src/app/shared/toasts-container/toast.service';
 
 @Component({
     selector: 'app-navigation',
@@ -19,13 +20,14 @@ import { AdminService } from '../admin/admin.service';
 })
 export class NavigationComponent implements OnInit {
     public constructor(
-        private authService: AuthService,
+        private readonly authService: AuthService,
         private readonly router: Router,
         private readonly profileService: ProfileService,
         private readonly searchStoreService: SearchStoreService,
         private readonly destroyRef: DestroyRef,
         private readonly showCookieStoreService: ShowCookieStoreService,
-        private readonly adminService: AdminService
+        private readonly adminService: AdminService,
+        private readonly toastService: ToastService
     ) {}
 
     search = new FormControl('');
@@ -60,6 +62,9 @@ export class NavigationComponent implements OnInit {
             this.profileService.deleteProfile(userToken).subscribe({
                 next: () => {
                     this.authService.removeAccount().then(() => {
+                        this.toastService.success(
+                            'You have successfully removed your account!'
+                        );
                         this.router.navigate(['/auth']);
                     });
                 },

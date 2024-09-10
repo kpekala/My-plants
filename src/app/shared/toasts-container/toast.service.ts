@@ -33,7 +33,7 @@ export class ToastService {
         this.toasts$.next({
             message,
             type: ToastType.ERROR,
-            className: 'bg-success text-light',
+            className: 'bg-danger text-light',
         });
     }
 }
